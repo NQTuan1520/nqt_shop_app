@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "851800943545",
+    "project_id": "store-e82c3",
+    "storage_bucket": "store-e82c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851800943545:android:ed13069ac3e6b8f1cbe468",
+        "android_client_info": {
+          "package_name": "com.tuan.nqt_shop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjFIlFUiUifmAakwXgBT1llzvkgAdI5zg"
+        },
+        {
+          "current_key": "AIzaSyAYnoKXoQaY7Rp-RGHEFfmy0Rva8xk-Fec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851800943545:android:705ad338f5c7b755cbe468",
+        "android_client_info": {
+          "package_name": "com.tuan.nqtuan_shop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjFIlFUiUifmAakwXgBT1llzvkgAdI5zg"
+        },
+        {
+          "current_key": "AIzaSyAYnoKXoQaY7Rp-RGHEFfmy0Rva8xk-Fec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851800943545:android:1c96252d73acebcbcbe468",
+        "android_client_info": {
+          "package_name": "com.tuan.nqtuan_vendor_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjFIlFUiUifmAakwXgBT1llzvkgAdI5zg"
+        },
+        {
+          "current_key": "AIzaSyAYnoKXoQaY7Rp-RGHEFfmy0Rva8xk-Fec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
