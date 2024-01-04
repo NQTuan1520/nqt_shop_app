@@ -442,76 +442,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ],
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 0 * fem, 3 * fem, 24 * fem),
-                          width: double.infinity,
-                          height: 24 * fem,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.fromLTRB(
-                                    0 * fem, 0 * fem, 151 * fem, 0 * fem),
-                                height: double.infinity,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          saveMe = !saveMe; // Toggle the state
-                                        });
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.fromLTRB(0 * fem,
-                                            0 * fem, 10 * fem, 0 * fem),
-                                        width: 36 * fem,
-                                        height: 20 * fem,
-                                        child: saveMe
-                                            ? Icon(
-                                          Icons.check_box,
-                                          color: Color(0xffffffff),
-                                        )
-                                            : Icon(
-                                          Icons.check_box_outline_blank,
-                                          color: Color(0xffffffff),
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          saveMe = !saveMe; // Toggle the state
-                                        });
-                                      },
-                                      child: Text(
-                                        'Save me',
-                                        style: TextStyle(
-                                          fontSize: textSize,
-                                          fontWeight: saveMe
-                                              ? FontWeight.bold
-                                              : FontWeight
-                                              .w300, // Change font weight based on state
-                                          color: Color(0xffffffff),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Text(
-                                'Forgot your password?',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  fontSize: textSize,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        SizedBox(height: 25,),
                         Container(
                           margin: EdgeInsets.fromLTRB(
                               3 * fem, 0 * fem, 4 * fem, 24 * fem),
@@ -528,7 +459,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               width: double.infinity,
                               height: 60 * fem,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.lightBlueAccent,
                                 borderRadius: BorderRadius.circular(10 * fem),
                               ),
                               child: Center(

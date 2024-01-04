@@ -11,11 +11,12 @@ class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
+
 //Uploading image and pick image
 
   _uploadProfileImageToStorage(Uint8List? image) async {
     Reference ref =
-    _storage.ref().child('profilePics').child(_auth.currentUser!.uid);
+        _storage.ref().child('profilePics').child(_auth.currentUser!.uid);
 
     UploadTask uploadTask = ref.putData(image!);
 
@@ -41,12 +42,12 @@ class AuthController extends GetxController {
 
 //Function to create new user
   Future<String> createUser(
-      String fullName,
-      String telephone,
-      String email,
-      String password,
-      Uint8List? image,
-      ) async {
+    String fullName,
+    String telephone,
+    String email,
+    String password,
+    Uint8List? image,
+  ) async {
     String res = 'some error occured';
 
     try {
@@ -79,14 +80,12 @@ class AuthController extends GetxController {
     return res;
   }
 
-  // Function to create new user ends here
-
 //Function to login user
 
   Future<String> loginUser(
-      String email,
-      String password,
-      ) async {
+    String email,
+    String password,
+  ) async {
     String res = 'some error occured';
 
     try {
@@ -98,6 +97,31 @@ class AuthController extends GetxController {
       res = e.toString();
     }
 
+    return res;
+  }
+
+  bool isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+  Future<String> forgotPassword(String email) async {
+    String res = 'Some error occurred';
+
+    try {
+      if (!isValidEmail(email)) {
+        res = 'Invalid email format';
+      } else {
+        if (email.isNotEmpty) {
+          await _auth.sendPasswordResetEmail(email: email);
+          res = 'success';
+          print('A reset link has been sent to your email');
+        } else {
+          res = 'Email field must not be empty';
+        }
+      }
+    } catch (e) {
+      res = e.toString();
+    }
     return res;
   }
 }

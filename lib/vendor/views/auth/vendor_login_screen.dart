@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:nqt_shop_app/vendor/views/auth/vendor_forgot_password_screen.dart';
 
 import '../../../controller/auth_controller.dart';
 import '../screens/landing_screen.dart';
@@ -87,6 +88,17 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: true, // Extend body behind the app bar
+      appBar: AppBar(
+        elevation: 0, // Remove the app bar shadow
+        backgroundColor: Colors.transparent, // Make the app bar transparent
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Container(
         width: double.infinity,
         child: Container(
@@ -188,7 +200,7 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
                                           18 * fem,
                                           25.58 * fem,
                                           18 * fem),
-                                      hintText: 'Input your email@hmail.com',
+                                      hintText: 'Input your email@gmail.com',
                                       hintStyle:
                                       TextStyle(color: Color(0xffbcbcbc)),
                                     ),
@@ -268,75 +280,84 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
                             ),
                             Container(
                               margin: EdgeInsets.fromLTRB(
-                                  0 * fem, 0 * fem, 3 * fem, 24 * fem),
-                              width: double.infinity,
-                              height: 24 * fem,
+                                  0 * fem, 0 * fem, 1 * fem, 11 * fem),
+                              width: 450 * fem,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          0 * fem, 0 * fem, 151 * fem, 0 * fem),
-                                      height: double.infinity,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                saveMe =
-                                                !saveMe; // Toggle the state
-                                              });
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  0 * fem,
-                                                  0 * fem,
-                                                  10 * fem,
-                                                  0 * fem),
-                                              width: 36 * fem,
-                                              height: 20 * fem,
-                                              child: saveMe
-                                                  ? Icon(
-                                                Icons.check_box,
-                                                color: Color(0xffffffff),
-                                              )
-                                                  : Icon(
-                                                Icons
-                                                    .check_box_outline_blank,
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ),
+                                  Row(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            saveMe =
+                                            !saveMe; // Toggle the state
+                                          });
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              0 * fem,
+                                              0 * fem,
+                                              10 * fem,
+                                              0 * fem),
+                                          width: 36 * fem,
+                                          height: 20 * fem,
+                                          child: saveMe
+                                              ? Icon(
+                                            Icons.check_box,
+                                            color: Color(0xffffffff),
+                                          )
+                                              : Icon(
+                                            Icons
+                                                .check_box_outline_blank,
+                                            color: Color(0xffffffff),
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                saveMe =
-                                                !saveMe; // Toggle the state
-                                              });
-                                            },
-                                            child: Text(
-                                              'Save me',
-                                              style: TextStyle(
-                                                fontSize: textSize,
-                                                fontWeight: saveMe
-                                                    ? FontWeight.bold
-                                                    : FontWeight
-                                                    .w300, // Change font weight based on state
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            saveMe =
+                                            !saveMe; // Toggle the state
+                                          });
+                                        },
+                                        child: Text(
+                                          'Save me',
+                                          style: TextStyle(
+                                            fontSize: textSize,
+                                            fontWeight: saveMe
+                                                ? FontWeight.bold
+                                                : FontWeight
+                                                .w300, // Change font weight based on state
+                                            color: Color(0xffffffff),
                                           ),
-                                        ],
-                                      )),
-                                  Text(
-                                    'Forgot your password?',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      fontSize: textSize,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 110,
+                                  ),
+                                  Expanded(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                                  return VendorForgotPasswordScreen();
+                                                }));
+                                      },
+                                      child: Text(
+                                        'Forgot your password?',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: textSize,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],

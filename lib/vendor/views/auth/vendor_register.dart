@@ -7,10 +7,10 @@ import '../../controllers/vendor_register_controller.dart';
 
 class VendorRegisterScreen extends StatefulWidget {
   @override
-  State<VendorRegisterScreen> createState() => _VendorLoginScreenState();
+  State<VendorRegisterScreen> createState() => _VendorRegisterScreenState();
 }
 
-class _VendorLoginScreenState extends State<VendorRegisterScreen> {
+class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
   bool saveMe = false;
 
   void toggleSaveMe() {
@@ -144,7 +144,7 @@ class _VendorLoginScreenState extends State<VendorRegisterScreen> {
                                     margin: EdgeInsets.fromLTRB(
                                         0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                     child: Text(
-                                      'Email',
+                                      'Email Address',
                                       style: TextStyle(
                                         fontSize: textSize,
                                         fontWeight: FontWeight.w500,
@@ -267,82 +267,7 @@ class _VendorLoginScreenState extends State<VendorRegisterScreen> {
                                 ],
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0 * fem, 0 * fem, 3 * fem, 24 * fem),
-                              width: double.infinity,
-                              height: 24 * fem,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          0 * fem, 0 * fem, 151 * fem, 0 * fem),
-                                      height: double.infinity,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                saveMe =
-                                                !saveMe; // Toggle the state
-                                              });
-                                            },
-                                            child: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  0 * fem,
-                                                  0 * fem,
-                                                  10 * fem,
-                                                  0 * fem),
-                                              width: 36 * fem,
-                                              height: 20 * fem,
-                                              child: saveMe
-                                                  ? Icon(
-                                                Icons.check_box,
-                                                color: Color(0xffffffff),
-                                              )
-                                                  : Icon(
-                                                Icons
-                                                    .check_box_outline_blank,
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                saveMe =
-                                                !saveMe; // Toggle the state
-                                              });
-                                            },
-                                            child: Text(
-                                              'Save me',
-                                              style: TextStyle(
-                                                fontSize: textSize,
-                                                fontWeight: saveMe
-                                                    ? FontWeight.bold
-                                                    : FontWeight
-                                                    .w300, // Change font weight based on state
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                  Text(
-                                    'Forgot your password?',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyle(
-                                      fontSize: textSize,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            SizedBox(height: 25,),
                             Container(
                               margin: EdgeInsets.fromLTRB(
                                   3 * fem, 0 * fem, 4 * fem, 24 * fem),
@@ -357,7 +282,7 @@ class _VendorLoginScreenState extends State<VendorRegisterScreen> {
                                   width: double.infinity,
                                   height: 60 * fem,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: Colors.lightBlueAccent,
                                     borderRadius:
                                     BorderRadius.circular(10 * fem),
                                   ),
