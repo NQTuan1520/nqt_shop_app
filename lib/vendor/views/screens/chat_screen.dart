@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'vendor_inner_screen/inner_chat_screen.dart';
 
 class VendorHomeChatScreen extends StatelessWidget {
   const VendorHomeChatScreen({Key? key}) : super(key: key);
+  static const routeName = '/vendorChat';
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +20,11 @@ class VendorHomeChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.yellow.shade900,
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.indigoAccent,
         elevation: 0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
               Icons.message,
@@ -30,8 +32,9 @@ class VendorHomeChatScreen extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              "Messages",
-              style: TextStyle(
+              "Thông báo tin nhắn",
+              style: GoogleFonts.getFont(
+                'Roboto',
                 color: Colors.black,
                 letterSpacing: 2,
                 fontWeight: FontWeight.bold,
@@ -55,8 +58,9 @@ class VendorHomeChatScreen extends StatelessWidget {
           if (snapshot.data!.docs.isEmpty) {
             return Center(
               child: Text(
-                'No Messages',
-                style: TextStyle(
+                'Không có tin nhắn nào cả',
+                style: GoogleFonts.getFont(
+                  'Roboto',
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 3,
@@ -118,7 +122,7 @@ class VendorHomeChatScreen extends StatelessWidget {
                     backgroundImage: NetworkImage(data['buyerPhoto']),
                   ),
                   title: Text(message),
-                  subtitle: isSellerMessage ? Text('Sent by Seller') : Text('Sent by Buyer'),
+                  subtitle: isSellerMessage ? Text('Gửi bởi Người Bán') : Text('Gửi bởi Người Mua'),
                 ),
               );
             },

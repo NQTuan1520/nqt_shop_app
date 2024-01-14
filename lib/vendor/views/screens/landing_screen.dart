@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nqt_shop_app/vendor/views/auth/vendor_login_screen.dart';
 import 'package:nqt_shop_app/vendor/views/screens/vendorMapScreen.dart';
 
@@ -65,9 +66,10 @@ class LandingScreen extends StatelessWidget {
                   height: 15,
                 ),
                 Text(
-                  'Your Application, has been send to shop admin\nAdmin will get back to you soon',
+                  'Đăng ký của bạn đã được gửi tới Quản Trị Viên\nVui lòng đợi Quản Trị Viên duyệt tài khoản',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: GoogleFonts.getFont(
+                    'Roboto',
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
@@ -82,7 +84,7 @@ class LandingScreen extends StatelessWidget {
                       return VendorLoginScreen();
                     }));
                   },
-                  child: Text('Sign Out'),
+                  child: Text('Trờ lại màn hình đăng nhập'),
                 ),
               ],
             ),

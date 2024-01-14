@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../provider/product_provider.dart';
+import '../../../../controller/provider/product_provider.dart';
 
 class ShippingScreeen extends StatefulWidget {
   @override
@@ -23,11 +24,13 @@ class _ShippingScreeenState extends State<ShippingScreeen>
       children: [
         CheckboxListTile(
           title: Text(
-            'Charge Shipping',
-            style: TextStyle(
-              fontSize: 18,
+            'Phí giao hàng',
+            style: GoogleFonts.getFont(
+              'Roboto',
+              fontSize: 17,
               fontWeight: FontWeight.bold,
-              letterSpacing: 4,
+              color: Colors.blue,
+              letterSpacing: 0,
             ),
           ),
           value: _chargeShipping,
@@ -44,7 +47,7 @@ class _ShippingScreeenState extends State<ShippingScreeen>
             child: TextFormField(
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter Shipping Charge';
+                  return 'Hãy điền phí giao hàng';
                 } else {
                   return null;
                 }
@@ -54,7 +57,7 @@ class _ShippingScreeenState extends State<ShippingScreeen>
               },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Shipping Charge',
+                labelText: 'Phí giao hàng',
               ),
             ),
           )

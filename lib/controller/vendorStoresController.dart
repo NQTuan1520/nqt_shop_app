@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../models/vendorModels.dart';
+import '../models/vendorModels.dart';
 
 class VendorStoreController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  RxList<Vendor> categories = <Vendor>[].obs;
+  RxList<VendorModel> categories = <VendorModel>[].obs;
 
   @override
   void onInit() {
@@ -18,9 +18,9 @@ class VendorStoreController extends GetxController {
       categories.assignAll(
         querySnapshot.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;
-          return Vendor(
-            VendorImage: data['storeImage'].toString(),
-            VendorName: data['businessName'].toString(),
+          return VendorModel(
+            vendorImage: data['storeImage'].toString(),
+            vendorName: data['businessName'].toString(),
           );
         }).toList(),
       );

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../controllers/vendor_register_controller.dart';
@@ -51,12 +52,12 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
   String? _taxStatus;
 
   List<String> _taxOptions = [
-    'YES',
-    'NO',
+    'CÓ',
+    'KHÔNG',
   ];
 
   _saveVendorDetail() async {
-    EasyLoading.show(status: 'PLEASE WAIT');
+    EasyLoading.show(status: 'Hãy đợi chút');
     if (_formKey.currentState!.validate()) {
       await _vendorController
           .registerVendor(businessName, email, phoneNumber, countryValue,
@@ -131,14 +132,14 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please Business Name must not be empty';
+                          return 'Vui lòng Tên doanh nghiệp không được để trống';
                         } else {
                           return null;
                         }
                       },
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
-                        labelText: 'Business Name',
+                        labelText: 'Tên doanh nghiệp',
                       ),
                     ),
                     SizedBox(
@@ -150,14 +151,14 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please Email Address Must not be empty';
+                          return 'Vui lòng Địa chỉ Email không được để trống';
                         } else {
                           return null;
                         }
                       },
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: 'Email Address',
+                        labelText: 'Địa chỉ email',
                       ),
                     ),
                     SizedBox(
@@ -169,14 +170,14 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please Phone Number Must not be empty';
+                          return 'Vui lòng Số Điện thoại Không được để trống';
                         } else {
                           return null;
                         }
                       },
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: 'Phone Number',
+                        labelText: 'Số Điện Thoại',
                       ),
                     ),
                     Padding(
@@ -205,8 +206,9 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Tax Registered?',
-                            style: TextStyle(
+                            'Mã Số Thuế?',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -215,7 +217,7 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                             child: Container(
                               width: 100,
                               child: DropdownButtonFormField(
-                                  hint: Text('Select'),
+                                  hint: Text('Chọn'),
                                   items: _taxOptions
                                       .map<DropdownMenuItem<String>>(
                                           (String value) {
@@ -232,7 +234,7 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                         ],
                       ),
                     ),
-                    if (_taxStatus == 'YES')
+                    if (_taxStatus == 'CÓ')
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextFormField(
@@ -241,12 +243,12 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please Tax Number Must not be empty';
+                              return 'Vui lòng mã số thuế không được để trống ';
                             } else {
                               return null;
                             }
                           },
-                          decoration: InputDecoration(labelText: 'Tax Number'),
+                          decoration: InputDecoration(labelText: 'Mã Số Thuế'),
                         ),
                       ),
                     SizedBox(
@@ -267,8 +269,9 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Save',
-                            style: TextStyle(
+                            'Lưu thông tin',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
                               fontSize: 18,
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

@@ -76,14 +76,29 @@ class WelcomeRegisterScren extends StatelessWidget {
                   ),
                   child: Center(
                     // Center the text vertically and horizontally
-                    child: Text(
-                      'Register As Buyer',
-                      style: GoogleFonts.getFont(
-                        'Poppins',
-                        color: Colors.black,
-                        fontSize: screenHeight * 0.022,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Đăng ký',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                            color: Colors.black,
+                            fontSize: screenHeight * 0.022,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(width: 5,),
+                        Text(
+                          'Người Mua',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                            color: Colors.red,
+                            fontSize: screenHeight * 0.022,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -106,21 +121,36 @@ class WelcomeRegisterScren extends StatelessWidget {
                   ),
                   child: Center(
                     // Center the text vertically and horizontally
-                    child: Text(
-                      'Register As Seller',
-                      style: GoogleFonts.getFont(
-                        'Poppins',
-                        color: Colors.black,
-                        fontSize: screenHeight * 0.022,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Đăng ký',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                            color: Colors.black,
+                            fontSize: screenHeight * 0.022,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(width: 5,),
+                        Text(
+                          'Người Bán',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                            color: Colors.blue,
+                            fontSize: screenHeight * 0.022,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
             Positioned(
-              left: screenWidth * 0.2,
+              left: screenWidth * 0.275,
               top: screenHeight * 0.88,
               child: SizedBox(
                 width: screenWidth * 0.72,
@@ -133,13 +163,13 @@ class WelcomeRegisterScren extends StatelessWidget {
                     textAlign: TextAlign.left,
                     text: TextSpan(
                       style: GoogleFonts.getFont(
-                        'Poppins',
+                        'Roboto',
                         color: Colors.white,
                         fontSize: screenHeight * 0.018,
                         fontWeight: FontWeight.w300,
                       ),
                       children: [
-                        const TextSpan(text: 'Already have an account?'),
+                        const TextSpan(text: 'Đã có tài khoản?'),
                         const TextSpan(
                           text: ' ',
                           style: TextStyle(
@@ -147,9 +177,9 @@ class WelcomeRegisterScren extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: 'Login',
+                          text: 'Đăng nhập',
                           style: GoogleFonts.getFont(
-                            'Poppins',
+                            'Roboto',
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),

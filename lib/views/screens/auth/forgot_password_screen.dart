@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../controller/auth_controller.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -27,15 +28,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
     if (res == 'success') {
       Get.snackbar(
-        'Password has been sent to your Email ',
-        'Check it!',
+        'Mật khẩu đã được gửi tới Email của bạn',
+        'Hãy kiểm tra nó!',
         backgroundColor: Colors.pink,
         colorText: Colors.white,
       );
       Navigator.pop(context);
     } else {
       Get.snackbar(
-        'Error Occurred',
+        'Đã có lỗi xảy ra',
         res.toString(),
         backgroundColor: Colors.pink,
         colorText: Colors.white,
@@ -76,8 +77,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Forgotten Password',
-                  style: TextStyle(
+                  'Quên Mật Khẩu',
+                  style: GoogleFonts.getFont(
+                    'Roboto',
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
                   ),
@@ -88,8 +90,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             SizedBox(height: 50,),
             Text(
-              'Provide your email and we will send you a link to reset your password',
-              style: TextStyle(
+              'Cung cấp email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn',
+              style: GoogleFonts.getFont(
+                'Roboto',
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
@@ -101,7 +104,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               controller: _emailController,
               decoration: InputDecoration(
                 filled: true,
-                hintText: 'Enter email',
+                hintText: 'Nhập email',
+                hintStyle: GoogleFonts.getFont(
+                  'Roboto'),
                 border: OutlineInputBorder(
                   borderRadius:
                   BorderRadius.circular(9),
@@ -146,8 +151,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   )
                       : Text(
-                    'Send password to Email',
-                    style: TextStyle(
+                    'Gửi mật khẩu tới Email',
+                    style: GoogleFonts.getFont(
+                      'Roboto',
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,

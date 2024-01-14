@@ -2,10 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:intl/intl.dart';
 
 class VendorOrderScreen extends StatefulWidget {
+  const VendorOrderScreen({super.key});
+
+  static const routeName = '/vendorOrders';
+
   @override
   State<VendorOrderScreen> createState() => _VendorOrderScreenState();
 }
@@ -46,8 +51,7 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
     if (date is Timestamp) {
       return date.toDate();
     } else if (date is String) {
-      return DateTime.tryParse(date) ??
-          DateTime.now();
+      return DateTime.tryParse(date) ?? DateTime.now();
     }
     return date;
   }
@@ -71,17 +75,20 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.yellow.shade900,
+          automaticallyImplyLeading: true,
+          backgroundColor: Colors.purpleAccent,
           elevation: 0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(Icons.shopify),
-              SizedBox(width: 5,),
+              SizedBox(
+                width: 5,
+              ),
               Text(
-                'My Orders',
-                style: TextStyle(
+                'Đơn Hàng',
+                style: GoogleFonts.getFont(
+                  'Roboto',
                   color: Colors.black,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -142,7 +149,7 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                           backgroundColor: Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
-                          label: 'Reject',
+                          label: 'Từ chối',
                         ),
                         SlidableAction(
                           onPressed: (context) async {
@@ -162,7 +169,7 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                           backgroundColor: Color(0xFF21B7CA),
                           foregroundColor: Colors.white,
                           icon: Icons.share,
-                          label: 'Accept',
+                          label: 'Chấp nhận',
                         ),
                       ],
                     ),
@@ -177,21 +184,23 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                   : Icon(Icons.access_time)),
                           title: document['accepted'] == true
                               ? Text(
-                                  'Accepted',
-                                  style:
-                                      TextStyle(color: Colors.yellow.shade900),
+                                  'Chấp nhận',
+                                  style: GoogleFonts.getFont('Roboto',
+                                      color: Colors.green),
                                 )
                               : Text(
-                                  'Not Accepted',
-                                  style: TextStyle(
+                                  'Chưa chấp nhận',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
                                     color: Colors.red,
                                   ),
                                 ),
                           trailing: Text(
-                            'Amount' +
+                            'Giá tiền:' +
                                 ' ' +
                                 document['productPrice'].toStringAsFixed(2),
-                            style: TextStyle(fontSize: 17, color: Colors.blue),
+                            style: GoogleFonts.getFont('Roboto',
+                                fontSize: 17, color: Colors.blue),
                           ),
                           subtitle: Text(
                             formatedDate(getDate(document['orderDate'])),
@@ -204,13 +213,19 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                         ),
                         ExpansionTile(
                           title: Text(
-                            'Order Details',
-                            style: TextStyle(
+                            'Chi tiết đơn hàng',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
                               color: Colors.yellow.shade900,
                               fontSize: 15,
                             ),
                           ),
-                          subtitle: Text('View Order Details'),
+                          subtitle: Text(
+                            'Xem chi tiết đơn hàng',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
+                            ),
+                          ),
                           children: [
                             ListTile(
                               leading: CircleAvatar(
@@ -227,8 +242,8 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
-                                        ('Quantity'),
-                                        style: TextStyle(
+                                        ('Số lượng'),
+                                        style: GoogleFonts.getFont('Roboto',
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -247,8 +262,9 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Schedule Delivery Date',
-                                          style: TextStyle(
+                                          'Ngày Nhận hàng',
+                                          style: GoogleFonts.getFont(
+                                            'Roboto',
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -265,8 +281,9 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
 
                                   ListTile(
                                     title: Text(
-                                      'Buyer Details',
-                                      style: TextStyle(
+                                      'Thông tin Người Mua',
+                                      style: GoogleFonts.getFont(
+                                        'Roboto',
                                         fontSize: 18,
                                       ),
                                     ),
@@ -300,7 +317,11 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                                 });
                                               },
                                               child: Text(
-                                                  'Transferred to Carrier'),
+                                                'Hàng đã được giao cho bên vận chuyển',
+                                                style: GoogleFonts.getFont(
+                                                  'Roboto',
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         if (showScheduleButton)
@@ -337,7 +358,7 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                                 _handleScheduleButtonClick(
                                                     context, orderId);
                                               },
-                                              child: Text('Schedule'),
+                                              child: Text('Đặt lịch'),
                                             ),
                                           ),
                                         if (transferredToCarrier || isScheduled)
@@ -348,8 +369,9 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  'Estimated Delivery Date',
-                                                  style: TextStyle(
+                                                  'Ngày Giao hàng dự kiến',
+                                                  style: GoogleFonts.getFont(
+                                                    'Roboto',
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -374,8 +396,9 @@ class _VendorOrderScreenState extends State<VendorOrderScreen> {
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 8.0),
                                             child: Text(
-                                              'Package has been sent to user!',
-                                              style: TextStyle(
+                                              'Người Mua đã nhận được thành công!',
+                                              style: GoogleFonts.getFont(
+                                                  'Roboto',
                                                   color: Colors.green),
                                             ),
                                           ),

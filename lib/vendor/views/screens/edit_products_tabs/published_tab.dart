@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../vendorProductDetail/vendor_product_detail_screen.dart';
 
@@ -35,8 +36,9 @@ class PublishedTab extends StatelessWidget {
           if (snapshot.data!.docs.isEmpty) {
             return Center(
               child: Text(
-                'No Published Products\nYet',
-                style: TextStyle(
+                'Chưa có sản phẩm nào ',
+                style: GoogleFonts.getFont(
+                  'Roboto',
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
@@ -136,7 +138,7 @@ class PublishedTab extends StatelessWidget {
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
-                          label: 'Delete',
+                          label: 'Xoá',
                         ),
                       ],
                     ));

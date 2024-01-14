@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../models/address_models.dart';
+import '../../models/address_models.dart';
+
+
 
 class AppData  with ChangeNotifier{
   AddressModels? pickUpAddress;

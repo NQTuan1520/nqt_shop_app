@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../provider/app_data.dart';
+import '../../../controller/provider/app_data.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({super.key});
@@ -26,7 +26,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     ;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Row(
         children: [
           Image.asset(
@@ -49,7 +49,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               child: TextField(
                 controller: _currentLocationController,
                 decoration: InputDecoration(
-                  hintText: 'Current Location',
+                  hintText: 'Địa chỉ hiện tại',
                   fillColor: Colors.white,
                   filled: true,
                   border: InputBorder.none,

@@ -9,25 +9,28 @@ import 'inner_screens/category_products_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
+  static const routeName = '/category';
+
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _categoriesStream =
-    FirebaseFirestore.instance.collection('categories').snapshots();
+        FirebaseFirestore.instance.collection('categories').snapshots();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purpleAccent,
-        automaticallyImplyLeading: false,
+        backgroundColor: Colors.blueAccent,
+        automaticallyImplyLeading: true,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(Icons.category),
             SizedBox(
               width: 5,
             ),
             Text(
-              'Categories',
-              style: TextStyle(
+              'Danh mục sản phẩm',
+              style: GoogleFonts.getFont(
+                'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
               ),
@@ -69,13 +72,12 @@ class CategoryScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return CategoryProductScreen(categoryData: categoryModel);
+                            return CategoryProductScreen(
+                                categoryData: categoryModel);
                           },
                         ),
                       );
                     },
-
-
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -96,13 +98,14 @@ class CategoryScreen extends StatelessWidget {
                             width: 80,
                             height: 80,
                           ),
-
                           SizedBox(
                             height: 10,
                           ),
-
                           Text(
-                            categoryData.get('categoryName').toString().toUpperCase(),
+                            categoryData
+                                .get('categoryName')
+                                .toString()
+                                .toUpperCase(),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

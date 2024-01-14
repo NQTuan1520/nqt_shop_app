@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../provider/product_provider.dart';
+import '../../../../controller/provider/product_provider.dart';
 
 class AttributesTabScreen extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _AttributesTabScreenState extends State<AttributesTabScreen>
           TextFormField(
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Enter Brand Name';
+                return 'Hãy điền tên Nhãn Hàng';
               } else {
                 return null;
               }
@@ -40,8 +41,12 @@ class _AttributesTabScreenState extends State<AttributesTabScreen>
               _productProvider.getFormData(brandName: value);
             },
             decoration: InputDecoration(
-              labelText: 'Brand',
-              labelStyle: TextStyle(fontWeight: FontWeight.bold),
+              labelText: 'Nhãn Hàng',
+              labelStyle: GoogleFonts.getFont(
+                'Roboto',
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
             ),
           ),
           SizedBox(
@@ -61,6 +66,11 @@ class _AttributesTabScreenState extends State<AttributesTabScreen>
                     },
                     decoration: InputDecoration(
                       labelText: 'Size',
+                      labelStyle: GoogleFonts.getFont(
+                        'Roboto',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
                 ),
@@ -75,7 +85,10 @@ class _AttributesTabScreenState extends State<AttributesTabScreen>
                         });
                       },
                       child: Text(
-                        'Add size',
+                        'Thêm size',
+                        style: GoogleFonts.getFont(
+                          'Roboto',
+                        ),
                       ),
                     )
                   : Text(''),
@@ -131,10 +144,10 @@ class _AttributesTabScreenState extends State<AttributesTabScreen>
                 });
               },
               child: Text(
-                _isSave ? 'Saved' : 'save',
+                _isSave ? 'Đã Lưu' : 'Lưu',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 3,
+                  letterSpacing: 1,
                 ),
               ),
             ),

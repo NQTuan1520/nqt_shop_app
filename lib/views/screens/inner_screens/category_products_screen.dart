@@ -4,7 +4,7 @@ import 'package:nqt_shop_app/views/screens/widget/category_item.dart';
 
 import '../../../models/categories_model.dart';
 import '../productDetail/product_detail_screen.dart';
-import '../productDetail/widget/productDetailModel.dart';
+import '../../../models/productDetailModel.dart';
 
 class CategoryProductScreen extends StatefulWidget {
   final dynamic categoryData;
@@ -24,18 +24,19 @@ class _CategoryProductScreen extends State<CategoryProductScreen> {
           'category',
           isEqualTo: widget.categoryData.categoryName,
         )
-        // .where('approved', isEqualTo: true)
+        .where('approved', isEqualTo: true)
         .snapshots();
 
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: Colors.pink.shade900,
+        backgroundColor: Colors.orange,
         title: Text(
           widget.categoryData.categoryName.toString(),
           style: TextStyle(
-            letterSpacing: 6,
+            letterSpacing: 2,
             fontWeight: FontWeight.bold,
+            color: Colors.black87,
           ),
         ),
       ),
@@ -57,9 +58,9 @@ class _CategoryProductScreen extends State<CategoryProductScreen> {
           if (snapshot.data!.docs.isEmpty) {
             return Center(
               child: Text(
-                'No Product Under\n This Category',
+                'Không có sản phẩm nào trong\n danh mục này',
                 style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 20,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold),
               ),

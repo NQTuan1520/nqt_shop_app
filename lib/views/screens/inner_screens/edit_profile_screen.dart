@@ -43,7 +43,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('Chỉnh sửa hồ sơ'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -52,15 +52,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           children: [
             TextFormField(
               controller: _fullNameController,
-              decoration: InputDecoration(labelText: 'Full Name'),
+              decoration: InputDecoration(labelText: 'Họ và tên'),
             ),
             TextFormField(
               controller: _placeNameController,
-              decoration: InputDecoration(labelText: 'Place Name'),
+              decoration: InputDecoration(labelText: 'Địa chỉ'),
             ),
             TextFormField(
               controller: _telephoneController,
-              decoration: InputDecoration(labelText: 'Telephone'),
+              decoration: InputDecoration(labelText: 'Số điện thoại'),
             ),
             TextFormField(
               controller: _emailController,
@@ -72,7 +72,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 // Update user information to Firebase
                 updateUserProfile();
               },
-              child: Text('Update Profile'),
+              child: Text('Cập nhật hồ sơ'),
             ),
           ],
         ),

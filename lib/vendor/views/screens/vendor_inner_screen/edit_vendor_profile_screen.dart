@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EditVendorProfileScreen extends StatefulWidget {
   @override
@@ -41,7 +42,8 @@ class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('Chỉnh sửa hồ sơ', style: GoogleFonts.getFont(
+        'Roboto',),),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -50,11 +52,11 @@ class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
           children: [
             TextFormField(
               controller: _businessNameController,
-              decoration: InputDecoration(labelText: 'Business Name'),
+              decoration: InputDecoration(labelText: 'Tên Công ty'),
             ),
             TextFormField(
               controller: _phoneNumberController,
-              decoration: InputDecoration(labelText: 'Phone Number'),
+              decoration: InputDecoration(labelText: 'Số điện thoại'),
             ),
             TextFormField(
               controller: _emailController,
@@ -66,7 +68,7 @@ class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
                 // Update user information to Firebase
                 updateUserProfile();
               },
-              child: Text('Update Profile'),
+              child: Text('Cập nhật hồ sơ'),
             ),
           ],
         ),

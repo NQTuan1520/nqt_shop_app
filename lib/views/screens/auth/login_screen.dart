@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nqt_shop_app/views/screens/auth/forgot_password_screen.dart';
 
 import '../../../controller/auth_controller.dart';
@@ -29,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isLoading = false;
 
+  bool _showPassword = false;
+
   loginUser() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -47,18 +50,27 @@ class _LoginScreenState extends State<LoginScreen> {
 
         Get.to(MapScreen());
         Get.snackbar(
-          'Login Success',
-          'You Are Now logged in',
+          'Đăng nhập thành công',
+          'Bạn đã đăng nhập',
           backgroundColor: Colors.pink,
           colorText: Colors.white,
         );
       } else {
         Get.snackbar(
-          'Error Occured',
+          'Đã có lỗi xảy ra',
           res.toString(),
           backgroundColor: Colors.red,
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
+          messageText: Text(
+            'Sai Email hoặc Mật Khẩu '
+            '\nXin hãy kiểm tra lại',
+            style: GoogleFonts.getFont(
+              'Roboto',
+              fontSize: 15,
+              color: Colors.white,
+            ),
+          ),
         );
       }
     }
@@ -78,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
 // Define different padding values based on screen height
     // Define different padding values based on screen height
     double bottomPadding;
+
 
     if (screenHeight < 6.8 * 10.0) {
       // For screens shorter than 6.8 inches, set bottomPadding to 10% of the screen height
@@ -160,7 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                         child: Text(
                                           'Email',
-                                          style: TextStyle(
+                                          style: GoogleFonts.getFont(
+                                            'Roboto',
                                             fontSize: textSize,
                                             fontWeight: FontWeight.w500,
                                             color: Color(0xffffffff),
@@ -177,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           if (value!.isNotEmpty) {
                                             return null;
                                           } else {
-                                            return 'Please Enter Email Address';
+                                            return 'Tài  Email không được bỏ trống';
                                           }
                                         },
                                         maxLines: null,
@@ -210,11 +224,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                               25.58 * fem,
                                               18 * fem),
                                           hintText:
-                                              'Input your email@gmail.com',
-                                          hintStyle: TextStyle(
+                                              'Nhập email của bạn(email@gmail.com)',
+                                          hintStyle: GoogleFonts.getFont(
+                                              'Roboto',
                                               color: Color(0xffbcbcbc)),
                                         ),
-                                        style: TextStyle(
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
                                           fontSize: textFieldFontSize,
                                           fontWeight: FontWeight.w400,
                                           color: Color(0xff000000),
@@ -224,75 +240,82 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(
-                                      0 * fem, 0 * fem, 1 * fem, 11 * fem),
+                                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 1 * fem, 11 * fem),
                                   width: 450 * fem,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.fromLTRB(
-                                            0 * fem, 0 * fem, 0 * fem, 5 * fem),
+                                        margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                         child: Text(
-                                          'Your password',
-                                          style: TextStyle(
+                                          'Mật khẩu',
+                                          style: GoogleFonts.getFont(
+                                            'Roboto',
                                             fontSize: textSize,
                                             fontWeight: FontWeight.w500,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
                                       ),
-                                      TextFormField(
-                                        obscureText: true,
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            return null;
-                                          } else {
-                                            return "Please Enter Password";
-                                          }
-                                        },
-                                        onChanged: (value) {
-                                          password = value;
-                                        },
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
+                                      Stack(
+                                        alignment: Alignment.centerRight,
+                                        children: [
+                                          TextFormField(
+                                            obscureText: !_showPassword,
+                                            validator: (value) {
+                                              if (value!.isNotEmpty) {
+                                                return null;
+                                              } else {
+                                                return "Mật khẩu không được bỏ trống";
+                                              }
+                                            },
+                                            onChanged: (value) {
+                                              password = value;
+                                            },
+                                            decoration: InputDecoration(
+                                              fillColor: Colors.white,
+                                              filled: true,
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(9),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(9),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(9),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(9),
+                                              ),
+                                              disabledBorder: InputBorder.none,
+                                              contentPadding: EdgeInsets.fromLTRB(20 * fem, 18 * fem, 48 * fem, 18 * fem),
+                                              hintText: 'Nhập mật khẩu của bạn',
+                                              hintStyle: GoogleFonts.getFont('Roboto', color: Color(0xffbcbcbc)),
+                                            ),
+                                            style: GoogleFonts.getFont(
+                                              'Roboto',
+                                              fontSize: textFieldFontSize,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
+                                          IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                _showPassword = !_showPassword;
+                                              });
+                                            },
+                                            icon: Icon(
+                                              _showPassword ? Icons.visibility : Icons.visibility_off,
+                                              color: Color(0xffbcbcbc),
+                                            ),
                                           ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(9),
-                                          ),
-                                          disabledBorder: InputBorder.none,
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              20 * fem,
-                                              18 * fem,
-                                              24.6 * fem,
-                                              18 * fem),
-                                          hintText: 'Input your password',
-                                          hintStyle: TextStyle(
-                                              color: Color(0xffbcbcbc)),
-                                        ),
-                                        style: TextStyle(
-                                          fontSize: textFieldFontSize,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff000000),
-                                        ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ),
+
                                 Container(
                                   margin: EdgeInsets.fromLTRB(
                                       0 * fem, 0 * fem, 1 * fem, 11 * fem),
@@ -340,8 +363,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               });
                                             },
                                             child: Text(
-                                              'Save me',
-                                              style: TextStyle(
+                                              'Lưu lại',
+                                              style: GoogleFonts.getFont(
+                                                'Roboto',
                                                 fontSize: textSize,
                                                 fontWeight: saveMe
                                                     ? FontWeight.bold
@@ -354,7 +378,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ],
                                       ),
                                       SizedBox(
-                                        width: 110,
+                                        width: 150,
                                       ),
                                       Expanded(
                                         child: TextButton(
@@ -366,9 +390,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                             }));
                                           },
                                           child: Text(
-                                            'Forgot your password?',
+                                            'Quên mật khẩu?',
                                             textAlign: TextAlign.left,
-                                            style: TextStyle(
+                                            style: GoogleFonts.getFont(
+                                              'Roboto',
                                               fontSize: textSize,
                                               fontWeight: FontWeight.w500,
                                               color: Colors.black,
@@ -410,29 +435,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 ),
                                               )
                                             : Text(
-                                                'Log In',
-                                                style: TextStyle(
+                                                'Đăng nhập',
+                                                style: GoogleFonts.getFont(
+                                                  'Roboto',
                                                   fontSize: buttonFontSize,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Colors.black,
+                                                  color: Colors.blue,
                                                 ),
                                               ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(
-                                      3 * fem, 0 * fem, 4 * fem, 24 * fem),
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    style: TextButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                    ),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 60 * fem,
-                                      decoration: BoxDecoration(),
                                     ),
                                   ),
                                 ),

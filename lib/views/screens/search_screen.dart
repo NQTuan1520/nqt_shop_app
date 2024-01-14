@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nqt_shop_app/views/screens/productDetail/product_detail_screen.dart';
-// import 'package:badges/badges.dart' as badges;
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+  static const routeName = '/search';
+
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
@@ -17,12 +20,12 @@ class _SearchScreenState extends State<SearchScreen> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
 
     final Stream<QuerySnapshot> _productsStream =
-    FirebaseFirestore.instance.collection('products').snapshots();
+        FirebaseFirestore.instance.collection('products').snapshots();
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pink.shade900,
-        automaticallyImplyLeading: false,
+        backgroundColor: Colors.orangeAccent,
+        automaticallyImplyLeading: true,
         elevation: 0,
         title: TextField(
           onChanged: (value) {
@@ -31,8 +34,9 @@ class _SearchScreenState extends State<SearchScreen> {
             });
           },
           decoration: InputDecoration(
-            labelText: 'Search For Products',
-            labelStyle: TextStyle(
+            labelText: 'Tìm kiếm sản phẩm',
+            labelStyle: GoogleFonts.getFont(
+              'Roboto',
               color: Colors.white,
               letterSpacing: 1.5,
             ),
@@ -84,8 +88,9 @@ class _SearchScreenState extends State<SearchScreen> {
               return Center(
                 heightFactor: 20,
                 child: Text(
-                  'You can search for products',
-                  style: TextStyle(
+                  'Bạn có thể tìm kiếm sản phẩm',
+                  style: GoogleFonts.getFont(
+                    'Roboto',
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
@@ -154,7 +159,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       '\$${e['productPrice'].toStringAsFixed(2)}',

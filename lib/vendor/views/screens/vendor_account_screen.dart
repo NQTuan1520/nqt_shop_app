@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nqt_shop_app/vendor/views/screens/vendor_inner_screen/edit_vendor_profile_screen.dart';
 import 'package:nqt_shop_app/views/screens/auth/welcome_screen/welcome_login_screen.dart';
 
@@ -18,7 +19,7 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
     CollectionReference users = FirebaseFirestore.instance.collection('vendors');
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellow.shade900,
+        backgroundColor: Colors.orangeAccent,
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: Padding(
@@ -32,7 +33,7 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
               ),
               SizedBox(width: 5),
               Text(
-                'Profile',
+                'Hồ sơ',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
@@ -41,19 +42,6 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
               ),
             ],
           ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Icon(
-              Icons.star,
-              color: Colors.pink,
-            ),
-          ),
-        ],
-        leading: Icon(
-          Icons.star,
-          color: Colors.pink,
         ),
       ),
       body: FutureBuilder<DocumentSnapshot>(
@@ -145,12 +133,14 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                       ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () async {
-                      // Receive data returned from EditProfileScreen
-                      Map<String, dynamic>? updatedData = await Navigator.push(
+                  ElevatedButton(
+                    onPressed: () async {
+                      Map<String, dynamic>? updatedData =
+                      await Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => EditVendorProfileScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => EditVendorProfileScreen(),
+                        ),
                       );
 
                       if (updatedData != null) {
@@ -162,24 +152,15 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                         });
                       }
                     },
-                    child: Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width - 200,
-                      decoration: BoxDecoration(
-                        color: Colors.yellow.shade900,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Edit Profile',
-                          style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 4,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.orangeAccent,
+                      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      elevation: 5,
+                      shadowColor: Colors.grey,
+                    ),
+                    child: Text(
+                      'Chỉnh sửa hồ sơ',
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                   Padding(
@@ -191,7 +172,8 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                   ),
                   ListTile(
                     leading: Icon(Icons.settings),
-                    title: Text('Settings'),
+                    title: Text('Cài đặt', style: GoogleFonts.getFont(
+                      'Roboto',),),
                   ),
                   ListTile(
                     onTap: () async {
@@ -203,7 +185,8 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                       });
                     },
                     leading: Icon(Icons.logout),
-                    title: Text('Logout'),
+                    title: Text('Đăng xuất', style: GoogleFonts.getFont(
+                      'Roboto',),),
                   ),
                 ],
               ),

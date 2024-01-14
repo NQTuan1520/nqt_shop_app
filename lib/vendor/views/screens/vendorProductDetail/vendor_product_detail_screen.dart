@@ -47,7 +47,7 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellow.shade900,
+        backgroundColor: Colors.orangeAccent,
         elevation: 0,
         title: Text(
           widget.productData['productName'],
@@ -59,14 +59,14 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
           child: Column(children: [
             TextFormField(
               controller: _productNameController,
-              decoration: InputDecoration(labelText: 'Product Name'),
+              decoration: InputDecoration(labelText: 'Tên sản phẩm'),
             ),
             SizedBox(
               height: 20,
             ),
             TextFormField(
               controller: _branNameController,
-              decoration: InputDecoration(labelText: 'Brand Name'),
+              decoration: InputDecoration(labelText: 'Tên hãng'),
             ),
             SizedBox(
               height: 20,
@@ -76,7 +76,7 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
                 productQuantity = int.parse(value);
               },
               controller: _quantityController,
-              decoration: InputDecoration(labelText: 'Quantity'),
+              decoration: InputDecoration(labelText: 'Số lượng'),
             ),
             SizedBox(
               height: 20,
@@ -86,7 +86,7 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
                 productPrice = double.parse(value);
               },
               controller: _productPriceController,
-              decoration: InputDecoration(labelText: 'Price'),
+              decoration: InputDecoration(labelText: 'Giá tiền'),
             ),
             SizedBox(
               height: 20,
@@ -95,7 +95,7 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
               maxLength: 800,
               maxLines: 3,
               controller: _productDescriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(labelText: 'Mô tả'),
             ),
             SizedBox(
               height: 20,
@@ -103,7 +103,7 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
             TextFormField(
               enabled: false,
               controller: _categoryNameController,
-              decoration: InputDecoration(labelText: 'Category'),
+              decoration: InputDecoration(labelText: 'Danh mục sản phẩm'),
             ),
           ]),
         ),
@@ -129,7 +129,6 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
                   return EditProductScreen();
                 }));
               } else {
-                Get.snackbar('CART', 'Update Quantity');
               }
             } catch (e) {
               print('Error updating product: $e');
@@ -139,17 +138,17 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
             height: 40,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: Colors.yellow.shade900,
+              color: Colors.orangeAccent,
               borderRadius: BorderRadius.circular(
                 10,
               ),
             ),
             child: Center(
                 child: Text(
-              "UPDATE PRODUCT",
+              "Cập nhật sản phẩm",
               style: TextStyle(
                 fontSize: 18,
-                letterSpacing: 6,
+                letterSpacing: 4,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),

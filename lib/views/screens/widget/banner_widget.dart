@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-import '../../../vendor/controllers/banner_controller.dart';
+import '../../../controller/banner_controller.dart';
 
 
 class BannerArea extends StatelessWidget {
@@ -48,7 +48,7 @@ class BannerArea extends StatelessWidget {
             print('No banners found.');
             return Center(
               child: Text(
-                'No banners available',
+                'Không có banner có sẵn',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.grey,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart' as rate;
+import 'package:google_fonts/google_fonts.dart';
 
 class AllReviewsScreen extends StatelessWidget {
   final String productID;
@@ -11,7 +12,7 @@ class AllReviewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Reviews'),
+        title: Text('Tất cả Đánh Giá'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -23,7 +24,8 @@ class AllReviewsScreen extends StatelessWidget {
             return CircularProgressIndicator();
           } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text('No reviews available'),
+              child: Text('Không có đánh giá nào', style: GoogleFonts.getFont(
+                'Roboto',),),
             );
           } else {
             return ListView.builder(

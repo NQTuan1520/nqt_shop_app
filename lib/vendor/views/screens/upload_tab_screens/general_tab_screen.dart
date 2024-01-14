@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../provider/product_provider.dart';
+import '../../../../controller/provider/product_provider.dart';
 
 class GeneralScreen extends StatefulWidget {
   @override
@@ -59,7 +59,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                 TextFormField(
                   validator: ((value) {
                     if (value!.isEmpty) {
-                      return 'Enter Product Name';
+                      return 'Hãy điền tên sản phẩm!';
                     } else {
                       return null;
                     }
@@ -68,7 +68,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                     _productProvider.getFormData(productName: value);
                   },
                   decoration: InputDecoration(
-                    labelText: 'Enter Product Name',
+                    labelText: 'Điền tên sản phẩm',
                   ),
                 ),
                 SizedBox(
@@ -77,7 +77,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                 TextFormField(
                   validator: ((value) {
                     if (value!.isEmpty) {
-                      return 'Enter Product Price';
+                      return 'Hãy điền giá sản phẩm!';
                     } else {
                       return null;
                     }
@@ -86,7 +86,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                     _productProvider.getFormData(productPrice: double.parse(value));
                   },
                   decoration: InputDecoration(
-                    labelText: 'Enter Product Price',
+                    labelText: 'Điền giá sản phẩm',
                   ),
                 ),
                 SizedBox(
@@ -95,7 +95,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                 TextFormField(
                   validator: ((value) {
                     if (value!.isEmpty) {
-                      return 'Enter Product Quanity';
+                      return 'Hãy điền số lượng sản phẩm!';
                     } else {
                       return null;
                     }
@@ -104,14 +104,14 @@ class _GeneralScreenState extends State<GeneralScreen>
                     _productProvider.getFormData(quantity: int.parse(value));
                   },
                   decoration: InputDecoration(
-                    labelText: 'Enter Product Quanity',
+                    labelText: 'Điền số lượng sản phẩm',
                   ),
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 DropdownButtonFormField(
-                    hint: Text('Select Category'),
+                    hint: Text('Hãy chọn danh mục sản phẩm'),
                     items: _categoryList.map<DropdownMenuItem<String>>((e) {
                       return DropdownMenuItem(value: e, child: Text(e));
                     }).toList(),
@@ -126,7 +126,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                 TextFormField(
                   validator: ((value) {
                     if (value!.isEmpty) {
-                      return 'Enter Product Description';
+                      return 'Hãy điền thông tin giới thiệu về sản phẩm!';
                     } else {
                       return null;
                     }
@@ -138,7 +138,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                   maxLines: 10,
                   maxLength: 800,
                   decoration: InputDecoration(
-                    labelText: 'Enter Product Description',
+                    labelText: 'Điền thông tin giới thiệu về sản phẩm',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -159,7 +159,7 @@ class _GeneralScreenState extends State<GeneralScreen>
                           });
                         });
                       },
-                      child: Text('Schedule'),
+                      child: Text('Lịch đăng tải'),
                     ),
                     if (_productProvider.productData['scheduleDate'] != null)
                       Text(

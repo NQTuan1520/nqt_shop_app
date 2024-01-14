@@ -1,8 +1,9 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import '../const/global_variable.dart';
+import '../controller/provider/app_data.dart';
 import '../models/address_models.dart';
-import '../provider/app_data.dart';
+
 import 'request_helper.dart';
 
 class HelperMethods {

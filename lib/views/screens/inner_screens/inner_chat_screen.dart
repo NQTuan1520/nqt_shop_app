@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InnerChatScreen extends StatefulWidget {
   final String productName;
@@ -84,9 +85,10 @@ class _InnerChatScreenState extends State<InnerChatScreen> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'Chat' + "> " + "" + widget.productName,
-          style: TextStyle(
-            letterSpacing: 4,
+          'Tin nhắn' + "> " + "" + widget.productName,
+          style: GoogleFonts.getFont(
+            'Roboto',
+            letterSpacing: 2,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -112,7 +114,8 @@ class _InnerChatScreenState extends State<InnerChatScreen> {
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: Text('No messages.'),
+                    child: Text('Không có tin nhắn', style: GoogleFonts.getFont(
+                      'Roboto',),),
                   );
                 }
 

@@ -31,13 +31,13 @@ class CategoryItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 16.0),
                   child: Text(
-                    'Categories',
+                    'Danh Mục Sản Phẩm',
                     style: GoogleFonts.getFont(
-                      'Poppins',
+                      'Roboto',
                       color: Colors.black,
                       fontSize: 18,
                       letterSpacing: 1,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -48,13 +48,13 @@ class CategoryItem extends StatelessWidget {
                     }));
                   },
                   child: Text(
-                    'See All',
+                    'Tất cả',
                     style: GoogleFonts.getFont(
-                      'Poppins',
+                      'Roboto',
                       color: Colors.black,
                       fontSize: 18,
                       letterSpacing: 1,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

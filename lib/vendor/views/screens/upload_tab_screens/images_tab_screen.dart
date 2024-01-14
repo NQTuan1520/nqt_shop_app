@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../provider/product_provider.dart';
+import '../../../../controller/provider/product_provider.dart';
 
 class ImagesTabScreen extends StatefulWidget {
   @override
@@ -74,9 +74,9 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
           SizedBox(
             height: 30,
           ),
-          TextButton(
+          ElevatedButton(
             onPressed: () async {
-              EasyLoading.show(status: 'Saving Images');
+              EasyLoading.show(status: 'Ảnh đang được lưu');
               for (var img in _image) {
                 Reference ref =
                 _storage.ref().child('productImages').child(Uuid().v4());
@@ -95,7 +95,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
                 EasyLoading.dismiss();
               });
             },
-            child: Text('upload'),
+            child: Text('Lưu ảnh'),
           ),
         ],
       ),

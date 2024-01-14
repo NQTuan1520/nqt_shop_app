@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/wishlist_models.dart';
+import '../../models/wishlist_models.dart';
+
+
 
 final favouriteProvider =
     StateNotifierProvider<FavouriteNotifier, Map<String, WishListModels>>(
@@ -20,8 +22,8 @@ class FavouriteNotifier extends StateNotifier<Map<String, WishListModels>> {
     String vendorId,
     String productSize,
     Timestamp scheduleDate,
-    double latitude,
-    double longitude,
+    dynamic latitude,
+    dynamic longitude,
     String businessName,
     dynamic storeImage,
     dynamic sizeList,

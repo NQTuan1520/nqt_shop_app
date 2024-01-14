@@ -70,7 +70,7 @@ class _VendorChatPageState extends State<VendorChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat' + "> " + "" + widget.productName),
+        title: Text('Tin nhắn' + "> " + "" + widget.productName),
       ),
       body: Column(
         children: [
@@ -194,7 +194,7 @@ class _VendorChatPageState extends State<VendorChatPage> {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Type a message...',
+                      hintText: 'Soạn tin nhắn...',
                     ),
                   ),
                 ),

@@ -2,15 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class CustomerOrderScreen extends StatefulWidget {
+  const CustomerOrderScreen({super.key});
+
+  static const routeName = '/order';
+
   @override
   State<CustomerOrderScreen> createState() => _CustomerOrderScreenState();
 }
 
 class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
-
   double rating = 0;
 
   final TextEditingController _reviewTextController = TextEditingController();
@@ -34,8 +38,6 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
     return DateTime.now();
   }
 
-
-
   DateTime? convertToDate(dynamic input) {
     if (input is Timestamp) {
       return input.toDate();
@@ -44,8 +46,6 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
     }
     return null;
   }
-
-
 
   Future<bool> hasUserReviewedProduct(String productID) async {
     final user = FirebaseAuth.instance.currentUser;
@@ -68,17 +68,34 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.pink.shade900,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.popUntil(context, ModalRoute.withName('/cart'));
+          },
+        ),
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.purpleAccent,
         elevation: 0,
-        title: Text(
-          'My Orders',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 5,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.shopify,
+              color: Colors.white,
+            ),
+            SizedBox(width: 10),
+            Text(
+              "Đơn mua",
+              style: GoogleFonts.getFont(
+                'Roboto',
+                color: Colors.white,
+                letterSpacing: 2,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+          ],
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -91,6 +108,20 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(color: Colors.pink.shade900),
+            );
+          }
+
+          if (snapshot.data!.docs.isEmpty) {
+            return Center(
+              child: Text(
+                'Không có đơn mua',
+                style: GoogleFonts.getFont(
+                  'Roboto',
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
             );
           }
 
@@ -108,26 +139,32 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                     ),
                     title: document['accepted'] == true
                         ? Text(
-                            'Accepted',
-                            style: TextStyle(color: Colors.pink.shade900),
+                            'Đã Chấp Nhận',
+                            style: GoogleFonts.getFont('Roboto',
+                                color: Colors.pink.shade900),
                           )
                         : Text(
-                            'Not Accepted',
-                            style: TextStyle(
+                            'Chưa chấp nhận',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
                               color: Colors.red,
                             ),
                           ),
                     trailing: Text(
-                      'Amount' +
+                      'Tổng tiền' +
                           ' ' +
-                          document['productPrice'].toStringAsFixed(2),
-                      style: TextStyle(fontSize: 17, color: Colors.pink),
+                          document['productPrice'].toStringAsFixed(2) +
+                          '' +
+                          '\$',
+                      style: GoogleFonts.getFont('Roboto',
+                          fontSize: 17, color: Colors.pink),
                     ),
                     subtitle: Text(
                       document['accepted'] == true
                           ? formatedDate(getDate(document['orderDate']))
-                          : 'Not scheduled yet',
-                      style: TextStyle(
+                          : 'Chưa chuyển hàng',
+                      style: GoogleFonts.getFont(
+                        'Roboto',
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                         color: Colors.pink,
@@ -136,13 +173,19 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                   ),
                   ExpansionTile(
                     title: Text(
-                      'Order Details',
-                      style: TextStyle(
+                      'Chi tiết đơn hàng',
+                      style: GoogleFonts.getFont(
+                        'Roboto',
                         color: Colors.pink.shade900,
                         fontSize: 15,
                       ),
                     ),
-                    subtitle: Text('View Order Details'),
+                    subtitle: Text(
+                      'Xem chi tiết đơn hàng',
+                      style: GoogleFonts.getFont(
+                        'Roboto',
+                      ),
+                    ),
                     children: [
                       ListTile(
                         leading: CircleAvatar(
@@ -158,8 +201,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  ('Quantity'),
-                                  style: TextStyle(
+                                  ('Số lượng'),
+                                  style: GoogleFonts.getFont('Roboto',
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -171,10 +214,16 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Schedule Delivery Date'),
+                                Text(
+                                  'Ngày Nhận Đơn:',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
+                                  ),
+                                ),
                                 if (document['accepted'] == true)
                                   Text(
-                                    formatedDate(getDate(document['orderDate'])).toString(),
+                                    formatedDate(getDate(document['orderDate']))
+                                        .toString(),
                                   ),
                               ],
                             ),
@@ -182,14 +231,18 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Estimated Delivery Date',
-                                  style: TextStyle(
+                                  'Ngày Giao Hàng Dự kiến:',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                if (document['estimatedDeliveryDate'] is Timestamp)
+                                if (document['estimatedDeliveryDate']
+                                    is Timestamp)
                                   Text(
-                                    DateFormat('dd/MM/yyyy').format(document['estimatedDeliveryDate'].toDate()),
+                                    DateFormat('dd/MM/yyyy').format(
+                                        document['estimatedDeliveryDate']
+                                            .toDate()),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.blue,
@@ -197,11 +250,11 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                                   ),
                               ],
                             ),
-
                             ListTile(
                               title: Text(
-                                'Buyer Details',
-                                style: TextStyle(
+                                'Chi tiết người mua',
+                                style: GoogleFonts.getFont(
+                                  'Roboto',
                                   fontSize: 18,
                                 ),
                               ),
@@ -209,10 +262,11 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(document['fullName']),
-                                  Text(document['telephone']),
-                                  Text(document['email']),
-                                  Text(document['placeName']),
+                                  Text('Tên:' + ' ' + document['fullName']),
+                                  Text('SĐT:' + ' ' + document['telephone']),
+                                  Text('Email:' + ' ' + document['email']),
+                                  Text(
+                                      'Địa chỉ:' + ' ' + document['placeName']),
                                 ],
                               ),
                             )
@@ -221,21 +275,25 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                       ),
                       if (document['receiveItem'] == false)
                         if (document['accepted'] == true)
-                            if (showReceivePackageButton(document['estimatedDeliveryDate']))
-                        ElevatedButton(
-                          onPressed: () async {
-                            // Update 'receiveItem' field to true in Firestore
-                            await FirebaseFirestore.instance
-                                .collection('orders')
-                                .doc(document['orderID'])
-                                .update({'receiveItem': true});
-
-                          },
-                          child: Text('Receive Package'),
-                        ),
-
+                          if (showReceivePackageButton(
+                              document['estimatedDeliveryDate']))
+                            ElevatedButton(
+                              onPressed: () async {
+                                // Update 'receiveItem' field to true in Firestore
+                                await FirebaseFirestore.instance
+                                    .collection('orders')
+                                    .doc(document['orderID'])
+                                    .update({'receiveItem': true});
+                              },
+                              child: Text(
+                                'Đã nhận hàng',
+                                style: GoogleFonts.getFont(
+                                  'Roboto',
+                                ),
+                              ),
+                            ),
                       if (document['receiveItem'] == true)
-                          ElevatedButton(
+                        ElevatedButton(
                           onPressed: () async {
                             final productID = document['productID'];
                             final hasReviewed =
@@ -245,9 +303,13 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  title: Text('Error'),
+                                  title: Text('Lỗi'),
                                   content: Text(
-                                      'You have already reviewed this product.'),
+                                    'Bạn đã đánh giá sản phẩm này rồi.',
+                                    style: GoogleFonts.getFont(
+                                      'Roboto',
+                                    ),
+                                  ),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
@@ -263,14 +325,19 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                  title: Text('Leave a Review'),
+                                  title: Text(
+                                    'Đánh giá',
+                                    style: GoogleFonts.getFont(
+                                      'Roboto',
+                                    ),
+                                  ),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       TextFormField(
                                         controller: _reviewTextController,
                                         decoration: InputDecoration(
-                                          labelText: 'Your Review',
+                                          labelText: 'Đánh giá của bạn',
                                         ),
                                       ),
                                       RatingBar.builder(
@@ -311,7 +378,6 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                                   actions: [
                                     TextButton(
                                       onPressed: () async {
-
                                         final review =
                                             _reviewTextController.text;
 
@@ -335,14 +401,24 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                                         _reviewTextController.clear();
                                         rating = 0;
                                       },
-                                      child: Text('Submit'),
+                                      child: Text(
+                                        'Xác nhận',
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               );
                             }
                           },
-                          child: Text('Leave a Review'),
+                          child: Text(
+                            'Đánh giá',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
+                            ),
+                          ),
                         ),
                     ],
                   ),
@@ -362,12 +438,8 @@ bool showReceivePackageButton(dynamic estimatedDeliveryDate) {
     DateTime now = DateTime.now();
     print('Now: $now');
     print('Delivery Date: $deliveryDateTime');
-    return now.isAfter(deliveryDateTime.subtract(Duration(days: 4))); // To display the button when the delivery date has arrived
+    return now.isAfter(deliveryDateTime.subtract(Duration(
+        days: 4))); // To display the button when the delivery date has arrived
   }
   return false;
 }
-
-
-
-
-

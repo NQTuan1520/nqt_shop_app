@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nqt_shop_app/views/screens/productDetail/widget/productDetailModel.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nqt_shop_app/models/productDetailModel.dart';
 
 class VendorStoreDetail extends StatelessWidget {
   final dynamic vendorData;
@@ -100,8 +101,9 @@ class VendorStoreDetail extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      "Telephone:" + " " + vendorData['phoneNumber'],
-                      style: TextStyle(
+                      "Điện thoại:" + " " + vendorData['phoneNumber'],
+                      style: GoogleFonts.getFont(
+                        'Roboto',
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
@@ -134,56 +136,52 @@ class VendorStoreDetail extends StatelessWidget {
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
                           children: [
-                            Row(
+                            Column(
                               children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Total Order',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.docs.length.toString(),
-                                      style: TextStyle(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.pink,
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  'Tổng số đơn hàng',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Total Earned',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      '\$' +
-                                          ' ' +
-                                          totalOrder.toStringAsFixed(2),
-                                      style: TextStyle(
-                                        color: Colors.pink,
-                                        fontSize: 19,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 20,
+                                Text(
+                                  snapshot.data!.docs.length.toString(),
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.pink,
+                                  ),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  'Tổng số tiền kiếm được',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
+                                    fontSize: 20,
+                                    decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '\$' + ' ' + totalOrder.toStringAsFixed(2),
+                                  style: TextStyle(
+                                    color: Colors.pink,
+                                    fontSize: 19,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 20,
                             ),
                             SizedBox(
                               height: 20,
@@ -192,8 +190,9 @@ class VendorStoreDetail extends StatelessWidget {
                                 ? Row(
                                     children: [
                                       Text(
-                                        'verified',
-                                        style: TextStyle(
+                                        'Đủ tiêu chuẩn',
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
                                           fontSize: 20,
                                         ),
                                       ),
@@ -206,8 +205,9 @@ class VendorStoreDetail extends StatelessWidget {
                                 : Row(
                                     children: [
                                       Text(
-                                        'Not verified',
-                                        style: TextStyle(
+                                        'Chưa đủ tiêu chuẩn',
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
                                           fontSize: 20,
                                           decoration: TextDecoration.underline,
                                         ),
@@ -231,22 +231,35 @@ class VendorStoreDetail extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(Icons.local_grocery_store_outlined),
-                    SizedBox(width: 5,),
-                    Text('List of Products:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.redAccent),),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Danh sách sản phẩm:',
+                      style: GoogleFonts.getFont('Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.redAccent),
+                    ),
                   ],
                 ),
               ),
               Container(
-                height: 500,
+                height: 350,
                 child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.size,
                   itemBuilder: (context, index) {
                     final productData = snapshot.data!.docs[index];
-                    return SingleChildScrollView(
-                        child: ProductDetailModel(
-                            productData: productData, fem: fem));
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                      child: ProductDetailModel(
+                        productData: productData,
+                        fem: fem,
+                      ),
+                    );
                   },
-                ),
+                )
               ),
             ],
           ),

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../controller/auth_controller.dart';
@@ -20,6 +21,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Uint8List? _image;
   bool _isLoading = false;
+
+  bool _showPassword = false;
 
   late String fullName;
 
@@ -55,14 +58,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (res == 'success') {
       Get.to(LoginScreen());
       Get.snackbar(
-        'Success',
-        'Congratulations Account has been Created For You',
+        'Đăng ký thành công',
+        'Tài khoản của bạn đã được tạo',
         colorText: Colors.white,
         backgroundColor: Colors.pink,
         margin: EdgeInsets.all(15),
         icon: Icon(
           Icons.message,
           color: Colors.white,
+        ),
+        messageText: Text(
+          'Xin chúc mừng Tài khoản của bạn đã được tạo',
+          style: GoogleFonts.getFont(
+            'Roboto',
+            fontSize: 15,
+            color: Colors.white,
+          ),
         ),
       );
 
@@ -71,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
     } else {
       Get.snackbar(
-        'Error Ocurred',
+        'Đã có lỗi xảy ra',
         res.toString(),
         snackPosition: SnackPosition.BOTTOM,
         colorText: Colors.white,
@@ -81,6 +92,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Icons.message,
           color: Colors.white,
         ),
+        // messageText: Text(
+        //   'Trùng Email',
+        //   style: GoogleFonts.getFont(
+        //     'Roboto',
+        //     fontSize: 15,
+        //     color: Colors.white,
+        //   ),
+        // ),
       );
     }
   }
@@ -116,12 +135,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: true, // Extend body behind the app bar
+      appBar: AppBar(
+        elevation: 0, // Remove the app bar shadow
+        backgroundColor: Colors.transparent, // Make the app bar transparent
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
           child: Container(
             padding:
-            EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, bottomPadding),
+                EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, bottomPadding),
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.yellow.shade900,
@@ -154,18 +184,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     children: [
                                       _image != null
                                           ? CircleAvatar(
-                                        backgroundImage:
-                                        MemoryImage(_image!),
-                                        radius: 65,
-                                      )
+                                              backgroundImage:
+                                                  MemoryImage(_image!),
+                                              radius: 65,
+                                            )
                                           : CircleAvatar(
-                                        radius: 65,
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Colors.white,
-                                          size: 70,
-                                        ),
-                                      ),
+                                              radius: 65,
+                                              child: Icon(
+                                                Icons.person,
+                                                color: Colors.white,
+                                                size: 70,
+                                              ),
+                                            ),
                                       Positioned(
                                         right: 0,
                                         child: IconButton(
@@ -201,8 +231,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       margin: EdgeInsets.fromLTRB(
                                           0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                       child: Text(
-                                        'Full Name',
-                                        style: TextStyle(
+                                        'Họ và Tên',
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
                                           fontSize: textSize,
                                           fontWeight: FontWeight.w500,
                                           color: Color(0xffffffff),
@@ -215,7 +246,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       },
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter your full name';
+                                          return 'Vui lòng nhập tên đầy đủ của bạn';
                                         } else {
                                           return null;
                                         }
@@ -225,7 +256,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         filled: true,
                                         border: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(9)),
+                                                BorderRadius.circular(9)),
                                         // focusedBorder: InputBorder.none,
                                         // enabledBorder: InputBorder.none,
                                         // errorBorder: InputBorder.none,
@@ -235,11 +266,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             18 * fem,
                                             25.58 * fem,
                                             18 * fem),
-                                        hintText: 'Input your full name',
+                                        hintText: 'Nhập tên đầy đủ của bạn',
                                         hintStyle:
-                                        TextStyle(color: Color(0xffbcbcbc)),
+                                            TextStyle(color: Color(0xffbcbcbc)),
                                       ),
-                                      style: TextStyle(
+                                      style: GoogleFonts.getFont(
+                                        'Roboto',
                                         fontSize: textFieldFontSize,
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff000000),
@@ -251,7 +283,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               // Display error message
                             ],
                           ),
-                        ),Container(
+                        ),
+                        Container(
                           margin: EdgeInsets.fromLTRB(
                               0 * fem, 0 * fem, 0 * fem, 14 * fem),
                           width: double.infinity,
@@ -269,8 +302,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       margin: EdgeInsets.fromLTRB(
                                           0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                       child: Text(
-                                        'Telephone',
-                                        style: TextStyle(
+                                        'Số điện thoại',
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
                                           fontSize: textSize,
                                           fontWeight: FontWeight.w500,
                                           color: Color(0xffffffff),
@@ -284,7 +318,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       },
                                       validator: (value) {
                                         if (value!.isEmpty) {
-                                          return 'Please enter your telephone';
+                                          return 'Vui lòng nhập số điện thoại của bạn';
                                         } else {
                                           return null;
                                         }
@@ -294,7 +328,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         filled: true,
                                         border: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(9)),
+                                                BorderRadius.circular(9)),
                                         // focusedBorder: InputBorder.none,
                                         // enabledBorder: InputBorder.none,
                                         // errorBorder: InputBorder.none,
@@ -304,11 +338,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             18 * fem,
                                             25.58 * fem,
                                             18 * fem),
-                                        hintText: 'Input your telephone',
-                                        hintStyle:
-                                        TextStyle(color: Color(0xffbcbcbc)),
+                                        hintText: 'Nhập số điện thoại của bạn',
+                                        hintStyle: GoogleFonts.getFont('Roboto',
+                                            color: Color(0xffbcbcbc)),
                                       ),
-                                      style: TextStyle(
+                                      style: GoogleFonts.getFont(
+                                        'Roboto',
                                         fontSize: textFieldFontSize,
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff000000),
@@ -332,8 +367,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 margin: EdgeInsets.fromLTRB(
                                     0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                 child: Text(
-                                  'Email Address',
-                                  style: TextStyle(
+                                  'Email',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
                                     fontSize: textSize,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xffffffff),
@@ -347,9 +383,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'Please enter your email address';
+                                    return 'Hãy điền địa chỉ email của bạn';
                                   } else if (!value.contains('@')) {
-                                    return 'Please enter a valid email address';
+                                    return 'Vui lòng nhập địa chỉ email hợp lệ';
                                   }
                                   return null;
                                 },
@@ -368,11 +404,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   disabledBorder: InputBorder.none,
                                   contentPadding: EdgeInsets.fromLTRB(20 * fem,
                                       18 * fem, 25.58 * fem, 18 * fem),
-                                  hintText: 'Input your email@gmail.com',
-                                  hintStyle:
-                                  TextStyle(color: Color(0xffbcbcbc)),
+                                  hintText:
+                                      'Nhập email của bạn(email@gmail.com)',
+                                  hintStyle: GoogleFonts.getFont('Roboto',
+                                      color: Color(0xffbcbcbc)),
                                 ),
-                                style: TextStyle(
+                                style: GoogleFonts.getFont(
+                                  'Roboto',
                                   fontSize: textFieldFontSize,
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xff000000),
@@ -383,66 +421,84 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(
-                              0 * fem, 0 * fem, 1 * fem, 11 * fem),
+                          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 1 * fem, 11 * fem),
                           width: 450 * fem,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                margin: EdgeInsets.fromLTRB(
-                                    0 * fem, 0 * fem, 0 * fem, 5 * fem),
+                                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                 child: Text(
-                                  'Your password',
-                                  style: TextStyle(
+                                  'Mật khẩu',
+                                  style: GoogleFonts.getFont(
+                                    'Roboto',
                                     fontSize: textSize,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xffffffff),
                                   ),
                                 ),
                               ),
-                              TextFormField(
-                                obscureText: true,
-                                onChanged: (value) {
-                                  password = value;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your password';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
+                              Stack(
+                                alignment: Alignment.centerRight,
+                                children: [
+                                  TextFormField(
+                                    obscureText: !_showPassword,
+                                    validator: (value) {
+                                      if (value!.isNotEmpty) {
+                                        return null;
+                                      } else {
+                                        return "Mật khẩu không được bỏ trống";
+                                      }
+                                    },
+                                    onChanged: (value) {
+                                      password = value;
+                                    },
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(9),
+                                      ),
+                                      disabledBorder: InputBorder.none,
+                                      contentPadding: EdgeInsets.fromLTRB(20 * fem, 18 * fem, 48 * fem, 18 * fem),
+                                      hintText: 'Nhập mật khẩu của bạn',
+                                      hintStyle: GoogleFonts.getFont('Roboto', color: Color(0xffbcbcbc)),
+                                    ),
+                                    style: GoogleFonts.getFont(
+                                      'Roboto',
+                                      fontSize: textFieldFontSize,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xff000000),
+                                    ),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _showPassword = !_showPassword;
+                                      });
+                                    },
+                                    icon: Icon(
+                                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                                      color: Color(0xffbcbcbc),
+                                    ),
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(9),
-                                  ),
-                                  errorBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
-                                  contentPadding: EdgeInsets.fromLTRB(
-                                      20 * fem, 18 * fem, 24.6 * fem, 18 * fem),
-                                  hintText: 'Input your password',
-                                  hintStyle:
-                                  TextStyle(color: Color(0xffbcbcbc)),
-                                ),
-                                style: TextStyle(
-                                  fontSize: textFieldFontSize,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff000000),
-                                ),
+                                ],
                               ),
-                              // Display error message
                             ],
                           ),
                         ),
-                        SizedBox(height: 25,),
+                        SizedBox(
+                          height: 25,
+                        ),
                         Container(
                           margin: EdgeInsets.fromLTRB(
                               3 * fem, 0 * fem, 4 * fem, 24 * fem),
@@ -459,26 +515,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               width: double.infinity,
                               height: 60 * fem,
                               decoration: BoxDecoration(
-                                color: Colors.lightBlueAccent,
+                                color: Colors.redAccent,
                                 borderRadius: BorderRadius.circular(10 * fem),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
                               ),
                               child: Center(
                                 child: _isLoading
                                     ? Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: SpinKitFadingCircle(
-                                    color: Colors.pink,
-                                    size: 50.0,
-                                  ),
-                                )
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: SpinKitFadingCircle(
+                                          color: Colors.pink,
+                                          size: 50.0,
+                                        ),
+                                      )
                                     : Text(
-                                  'Register',
-                                  style: TextStyle(
-                                    fontSize: buttonFontSize,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black,
-                                  ),
-                                ),
+                                        'Đăng ký',
+                                        style: GoogleFonts.getFont(
+                                          'Roboto',
+                                          fontSize: buttonFontSize,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),

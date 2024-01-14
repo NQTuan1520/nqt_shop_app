@@ -1,6 +1,6 @@
-class Vendor {
-  final String VendorName;
-  final String VendorImage;
+class VendorModel {
+  final String vendorName;
+  final String vendorImage;
 
-  Vendor({required this.VendorName, required this.VendorImage});
+  VendorModel({required this.vendorName, required this.vendorImage});
 }

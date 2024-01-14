@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nqt_shop_app/vendor/views/screens/main_vendor_screen.dart';
 import 'package:provider/provider.dart';
+import '../../../controller/provider/app_data.dart';
 import '../../../helpers/helper_methods.dart';
-import '../../../provider/app_data.dart';
 
 class VendorMapScreen extends StatefulWidget {
   const VendorMapScreen({super.key});
@@ -29,6 +30,13 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
   /// geting user location
 
   late Position currentPosition;
+  late StreamSubscription<Position> _positionStreamSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    setUpPositionLocation();
+  }
 
   setUpPositionLocation() async {
     await Geolocator.checkPermission();
@@ -48,14 +56,26 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
     String address =
     await HelperMethods.findCordinateAddress(position, context);
 
+    _positionStreamSubscription = Geolocator.getPositionStream().listen((Position position) {
+      setState(() {
+        currentPosition = position;
+      });
+    });
+
     print(address);
     print('ok');
   }
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng(21.0136526, 105.8318255),
     zoom: 14.4746,
   );
+
+  @override
+  void dispose() {
+    _positionStreamSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,43 +116,19 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
                       width: MediaQuery.of(context).size.width - 70,
                       child: ElevatedButton.icon(
                         onPressed: () async {
-                          final appData =
-                          Provider.of<AppData>(context, listen: false);
-                          if (appData.pickUpAddress != null) {
-                            final latitude = appData.pickUpAddress!.latitude;
-                            final longitude = appData.pickUpAddress!.longitude;
-                            final placeName = appData.pickUpAddress!.placeName;
-
-                            EasyLoading.show(status: 'Saving Location...');
-                            await FirebaseFirestore.instance
-                                .collection('buyers')
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .update({
-                              'latitude': latitude,
-                              'longitude': longitude,
-                              'placeName': placeName,
-                            }).whenComplete(() {
-                              EasyLoading.dismiss();
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return MainVendorScreen();
-                                  }));
-                            });
-                          } else {
-                            print('pickupAddress is null');
-                            Navigator.push(context,
+                            Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (context) {
                                   return MainVendorScreen();
                                 }));
-                          }
                         },
-                        icon: Icon(FontAwesomeIcons.shop),
+                        icon: Icon(FontAwesomeIcons.stackOverflow),
                         label: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Text(
-                            'GO TO DASHBOARD ',
-                            style: TextStyle(
-                              letterSpacing: 4,
+                            'Tới màn hình chính',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
+                              letterSpacing: 2,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

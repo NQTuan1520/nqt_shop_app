@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../productDetail/widget/productDetailModel.dart';
+import '../../../models/productDetailModel.dart';
 
 class NewProductWidget extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class NewProductWidget extends StatefulWidget {
 }
 
 class _NewProductWidgetState extends State<NewProductWidget> {
-  final PageController _pageController = PageController(initialPage: 0);
+  final ScrollController _scrollController = ScrollController();
   Timer? _timer;
   int _currentPage = 0;
   late Stream<QuerySnapshot> _productsStream;
@@ -21,26 +21,26 @@ class _NewProductWidgetState extends State<NewProductWidget> {
   void initState() {
     super.initState();
     _productsStream =
-        FirebaseFirestore.instance.collection('products').snapshots();
+        FirebaseFirestore.instance.collection('products').where('approved', isEqualTo: true).snapshots();
     _startAutoScroll();
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _scrollController.dispose();
     _timer?.cancel();
     super.dispose();
   }
 
   void _startAutoScroll() {
     _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (_currentPage < _snapshot.data!.size - 1) {
+      if (_currentPage < _snapshot.data!.docs.length - 1) {
         _currentPage++;
       } else {
         _currentPage = 0;
       }
-      _pageController.animateToPage(
-        _currentPage,
+      _scrollController.animateTo(
+        _currentPage *250,
         duration: Duration(milliseconds: 500),
         curve: Curves.ease,
       );
@@ -69,11 +69,12 @@ class _NewProductWidgetState extends State<NewProductWidget> {
 
         _snapshot = snapshot; // Assign the snapshot to the class-level variable
 
-        return SizedBox(
-          height: 100,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: snapshot.data!.size,
+        return Container(
+          height: 250,
+          child: ListView.builder(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               final productData = snapshot.data!.docs[index];
               return ProductDetailModel(

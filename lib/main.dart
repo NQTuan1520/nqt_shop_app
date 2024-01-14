@@ -9,17 +9,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'package:get/get.dart';
-import 'package:nqt_shop_app/provider/app_data.dart';
-import 'package:nqt_shop_app/provider/product_provider.dart';
-import 'package:nqt_shop_app/vendor/controllers/banner_controller.dart';
-import 'package:nqt_shop_app/vendor/controllers/vendorStoresController.dart';
+import 'package:nqt_shop_app/controller/banner_controller.dart';
+import 'package:nqt_shop_app/controller/vendorStoresController.dart';
+import 'package:nqt_shop_app/vendor/views/screens/chat_screen.dart';
+import 'package:nqt_shop_app/vendor/views/screens/earnings_screen.dart';
+import 'package:nqt_shop_app/vendor/views/screens/vendor_upload_screen.dart';
+import 'package:nqt_shop_app/vendor/views/screens/vendor_order_screen.dart';
 import 'package:nqt_shop_app/views/screens/auth/welcome_screen/welcome_register_screen.dart';
+import 'package:nqt_shop_app/views/screens/cart_screen.dart';
+import 'package:nqt_shop_app/views/screens/category_screen.dart';
+import 'package:nqt_shop_app/views/screens/chat_screen.dart';
 import 'package:nqt_shop_app/views/screens/home_screen.dart';
+import 'package:nqt_shop_app/views/screens/order_screen.dart';
+import 'package:nqt_shop_app/views/screens/search_screen.dart';
+import 'package:nqt_shop_app/views/screens/wishlist_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import 'controller/auth_controller.dart';
 import 'controller/category_controller.dart';
+import 'controller/provider/app_data.dart';
+import 'controller/provider/product_provider.dart';
 
 void main() async {
   // Ensure that Flutter is initialized.
@@ -81,6 +91,20 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return GetMaterialApp(
+      routes: {
+        '/home': (context) => HomeScreen(),
+        '/category': (context) => CategoryScreen(),
+        '/cart': (context) => CartScreen(),
+        '/wishlist': (context) => WishListScreen(),
+        '/search': (context) => SearchScreen(),
+        '/order': (context) => CustomerOrderScreen(),
+        '/chat': (context) => UserHomeChatScreen(),
+        '/vendorEarnings': (context) => EarningsScreen(),
+        '/vendorUpload': (context) => UploadScreen(),
+        '/vendorChat': (context) => VendorHomeChatScreen(),
+        '/vendorOrders': (context) => VendorOrderScreen(),
+
+      },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

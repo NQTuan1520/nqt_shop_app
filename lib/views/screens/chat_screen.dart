@@ -1,28 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nqt_shop_app/views/screens/inner_screens/inner_chat_screen.dart';
-
 
 class UserHomeChatScreen extends StatelessWidget {
   const UserHomeChatScreen({Key? key}) : super(key: key);
+  static const routeName = '/chat';
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
         .collection('chats')
-        .where('buyerID', isEqualTo: FirebaseAuth.instance.currentUser!.uid).orderBy('timestamp', descending: true)
-    // Add orderBy clause
+        .where('buyerID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .orderBy('timestamp', descending: true)
+        // Add orderBy clause
         .snapshots();
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.greenAccent,
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.indigoAccent,
         elevation: 0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
               Icons.message,
@@ -30,8 +32,9 @@ class UserHomeChatScreen extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              "Messages",
-              style: TextStyle(
+              "Tin nhắn",
+              style: GoogleFonts.getFont(
+                'Roboto',
                 color: Colors.black,
                 letterSpacing: 2,
                 fontWeight: FontWeight.bold,
@@ -55,11 +58,12 @@ class UserHomeChatScreen extends StatelessWidget {
           if (snapshot.data!.docs.isEmpty) {
             return Center(
               child: Text(
-                'No Messages',
-                style: TextStyle(
+                'Không có tin nhắn',
+                style: GoogleFonts.getFont(
+                  'Roboto',
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 5,
+                  letterSpacing: 2,
                 ),
               ),
             );
@@ -74,28 +78,33 @@ class UserHomeChatScreen extends StatelessWidget {
 
             lastMessages.update(key, (existingDoc) {
               // Check if the current message's timestamp is newer
-              if (existingDoc['timestamp'].toDate().isBefore(doc['timestamp'].toDate())) {
+              if (existingDoc['timestamp']
+                  .toDate()
+                  .isBefore(doc['timestamp'].toDate())) {
                 return doc;
               }
               return existingDoc;
             }, ifAbsent: () => doc);
           });
 
-          List<QueryDocumentSnapshot> lastMessagesList = lastMessages.values.toList();
+          List<QueryDocumentSnapshot> lastMessagesList =
+              lastMessages.values.toList();
 
           return ListView.builder(
             padding: EdgeInsets.all(8.0),
             itemCount: lastMessagesList.length,
             itemBuilder: (BuildContext context, int index) {
               QueryDocumentSnapshot document = lastMessagesList[index];
-              Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
               String message = data['message'].toString();
               String senderId = data['senderId'].toString();
               String productID = data['productID'].toString();
               String sellerID = data['sellerID'].toString();
               String productName = data['productName'].toString();
 
-              bool isSellerMessage = senderId == FirebaseAuth.instance.currentUser!.uid;
+              bool isSellerMessage =
+                  senderId == FirebaseAuth.instance.currentUser!.uid;
 
               return GestureDetector(
                 onTap: () {
@@ -118,7 +127,19 @@ class UserHomeChatScreen extends StatelessWidget {
                     backgroundImage: NetworkImage(data['buyerPhoto']),
                   ),
                   title: Text(message),
-                  subtitle: isSellerMessage ? Text('Sent by Buyer') : Text('Sent by Seller'),
+                  subtitle: isSellerMessage
+                      ? Text(
+                          'Gửi bởi người mua',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                          ),
+                        )
+                      : Text(
+                          'Gửi bởi người bán',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                          ),
+                        ),
                 ),
               );
             },

@@ -1,100 +1,163 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:nqt_shop_app/views/screens/chat_screen.dart';
-import 'package:nqt_shop_app/views/screens/order_screen.dart';
-import 'package:nqt_shop_app/views/screens/search_screen.dart';
-import 'package:nqt_shop_app/views/screens/wishlist_screen.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+
 import 'account_screen.dart';
-import 'cart_screen.dart';
-import 'category_screen.dart';
 import 'home_screen.dart';
+import 'menu_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
-  int _pageIndex = 0;
+class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
+  int _pageIndex = 1;
+  int _bottomNavIndex = 1;
+  AnimationController? _animationController;
 
   List<Widget> _pages = [
+    MenuScreen(),
     HomeScreen(),
-    CategoryScreen(),
-    CartScreen(),
-    WishListScreen(),
-    SearchScreen(),
-    UserHomeChatScreen(),
-    CustomerOrderScreen(),
     AccountScreen(),
   ];
+
+  List<String> _tabTitles = [
+    'Menu',
+    'Home',
+    'Account',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _pageIndex,
-        onTap: (value) {
-          setState(() {
-            _pageIndex = value;
-          });
-        },
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.yellow.shade900,
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/store-1.png',
-              fit: BoxFit.cover,
-              width: 20,
-            ),
-            label: 'HOME',
-            tooltip: 'HOME',
-
+      appBar: AppBar(
+        backgroundColor: Colors.orangeAccent,
+        toolbarHeight: 40,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {
+            Navigator.pushNamed(context, '/search');
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.pushNamed(context, '/wishlist');
+            },
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/explore.svg',
-              width: 20,
-            ),
-            label: 'CATEGORIES',
-            tooltip: 'CATEGORIES',
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/cart.svg'),
-            label: 'CART',
-            tooltip: 'CART',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/favorite.svg'),
-            label: 'FAVORITE',
-            tooltip: 'FAVORITE',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/search.svg'),
-            label: 'SEARCH',
-            tooltip: 'SEARCH',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.chat_bubble),
-            label: 'CHAT',
-            tooltip: 'CHAT',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.bag),
-            label: 'ORDERS',
-            tooltip: 'ORDERS',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/account.svg'),
-            label: 'ACCOUNT',
-            tooltip: 'ACCOUNT',
+          IconButton(
+            icon: Icon(Icons.chat),
+            onPressed: () {
+              Navigator.pushNamed(context, '/chat');
+            },
           ),
         ],
       ),
-      body: _pages[_pageIndex],
+      body: Stack(
+        children: [
+          Offstage(
+            offstage: _pageIndex != 0, // Hide non-HomeScreen when not selected
+            child: TickerMode(
+              enabled: _pageIndex == 0, // Stop updating widget when not selected
+              child: _pages[_pageIndex],
+            ),
+          ),
+          Offstage(
+            offstage: _pageIndex == 0, // Hide the screens when selected
+            child: _buildMainScreens(),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Material(
+        elevation: 20,
+        child: AnimatedBottomNavigationBar.builder(
+          itemCount: 3,
+          tabBuilder: (index, isActive) {
+            switch (index) {
+              case 0:
+                return _buildIcon(Icons.menu, isActive, _tabTitles[0]);
+              case 1:
+                return _buildIcon(Icons.home, isActive, _tabTitles[1]);
+              case 2:
+            return _buildIcon(Icons.account_circle, isActive, _tabTitles[2]);
+              default:
+                return Icon(Icons.error);
+            }
+          },
+          backgroundColor: Colors.white,
+          activeIndex: _bottomNavIndex,
+          splashColor: Colors.orangeAccent,
+          notchAndCornersAnimation: _animationController!,
+          splashSpeedInMilliseconds: 300,
+          notchSmoothness: NotchSmoothness.defaultEdge,
+          onTap: (index) {
+            setState(() {
+              _bottomNavIndex = index;
+              _pageIndex = index; // Use the selected index as page index
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMainScreens() {
+    return IndexedStack(
+      index: _pageIndex,
+      children: _pages,
+    );
+  }
+
+  Widget _buildIcon(IconData icon, bool isActive, String title) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: isActive ? 30 : 22, // Change size when selected
+          color: isActive ? Colors.orangeAccent : Colors.black, // Change color when selected
+        ),
+        if (isActive)
+          Text(
+            title,
+            style: TextStyle(fontSize: 12, color: Colors.black), // Text style for titles
+          ),
+        if (isActive)
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.orangeAccent, // Change border color when selected
+            ),
+          ),
+      ],
     );
   }
 }

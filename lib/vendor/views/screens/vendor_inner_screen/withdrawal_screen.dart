@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nqt_shop_app/vendor/views/screens/earnings_screen.dart';
 import 'package:nqt_shop_app/vendor/views/screens/main_vendor_screen.dart';
 
@@ -11,7 +12,7 @@ class WithdrawalScreen extends StatelessWidget {
 
   late String name;
 
-  late String mobile;
+  late String phoneNumber;
 
   late String bankName;
   late String bankAccountName;
@@ -29,11 +30,12 @@ class WithdrawalScreen extends StatelessWidget {
         backgroundColor: Colors.yellow.shade900,
         elevation: 0,
         title: Text(
-          'Withdraw ',
-          style: TextStyle(
+          'Rút tiền ',
+          style: GoogleFonts.getFont(
+            'Roboto',
             color: Colors.white,
-            letterSpacing: 6,
-            fontSize: 18,
+            letterSpacing: 2,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -48,7 +50,7 @@ class WithdrawalScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please Field must not be empty';
+                      return 'Hãy điền đủ thông tin';
                     } else {
                       return null;
                     }
@@ -58,13 +60,13 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'Amount',
+                    labelText: 'Tiền',
                   ),
                 ),
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return ' Please Name must not be empty';
+                      return ' Họ và tên không được để trống';
                     } else {
                       return null;
                     }
@@ -74,7 +76,7 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: 'Name',
+                    labelText: 'Họ và tên',
                   ),
                 ),
                 SizedBox(
@@ -83,17 +85,17 @@ class WithdrawalScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Mobile must not be empty';
+                      return 'Số điện thoại không được để trống';
                     } else {
                       return null;
                     }
                   },
                   onChanged: (value) {
-                    mobile = value;
+                    phoneNumber = value;
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'Mobile',
+                    labelText: 'Số điện thoại',
                   ),
                 ),
                 SizedBox(
@@ -102,7 +104,7 @@ class WithdrawalScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Bank Name must not be empty';
+                      return 'Tên tài khoản ngân hàng không được để trống';
                     } else {
                       return null;
                     }
@@ -112,7 +114,7 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: 'Bank Name, eg Vpbank',
+                    labelText: 'Tên tài khoản ngân hàng, ví dụ: Vpbank, LPB,...',
                   ),
                 ),
                 SizedBox(
@@ -121,7 +123,7 @@ class WithdrawalScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please Field must not be empty';
+                      return 'Hãy điền đủ thông tin';
                     } else {
                       return null;
                     }
@@ -131,7 +133,7 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'Bank Account Name, Eg Nguyen Quang Tuan',
+                    labelText: 'Tên tài khoản ngân hàng, ví dụ: Nguyen Quang Tuan,...',
                   ),
                 ),
                 SizedBox(
@@ -140,7 +142,7 @@ class WithdrawalScreen extends StatelessWidget {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please Field must not be empty';
+                      return 'Hãy điền đủ thông tin';
                     } else {
                       return null;
                     }
@@ -150,7 +152,7 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'Bank Account Number',
+                    labelText: 'Số tài khoản ngân hàng',
                   ),
                 ),
                 ElevatedButton(
@@ -162,12 +164,12 @@ class WithdrawalScreen extends StatelessWidget {
                           .collection('withdrawal')
                           .doc(Uuid().v4())
                           .set({
-                        'Amount': amount,
-                        'Name': name,
-                        'Mobile': mobile,
-                        'BankName': bankName,
-                        'BankAccountName': bankAccountName,
-                        'BankAccountNumber': bankAccountNumber,
+                        'amount': amount,
+                        'name': name,
+                        'phoneNumber': phoneNumber,
+                        'bankName': bankName,
+                        'bankAccountName': bankAccountName,
+                        'bankAccountNumber': bankAccountNumber,
                       });
                       print('good');
                     } else {
@@ -178,8 +180,9 @@ class WithdrawalScreen extends StatelessWidget {
                     }));
                   },
                   child: Text(
-                    'Get Cash',
-                    style: TextStyle(
+                    'Rút tiền',
+                    style: GoogleFonts.getFont(
+                      'Roboto',
                       fontSize: 18,
                     ),
                   ),

@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nqt_shop_app/models/productDetailModel.dart';
 import 'package:nqt_shop_app/views/screens/productDetail/vendor_store_detail_screen.dart';
 import 'package:rating_summary/rating_summary.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,8 +20,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../provider/app_data.dart';
-import '../../../provider/cart_provider.dart';
+import '../../../controller/provider/cart_provider.dart';
 import '../inner_screens/all_reviews_screen.dart';
 import '../inner_screens/inner_chat_screen.dart';
 
@@ -46,6 +47,7 @@ class _ProductDetailScreenState
 
     return total / ratings.length;
   }
+
 
   final String message = 'Hello from my Flutter app!';
   double bottomPadding = 0;
@@ -75,10 +77,10 @@ class _ProductDetailScreenState
         if (phoneNumber != null) {
           callSeller(phoneNumber);
         } else {
-          throw 'Phone number is null or empty';
+          throw 'Số điện thoại không có giá trị hoặc trống';
         }
       } else {
-        throw 'Document does not exist';
+        throw 'Tài liệu không tồn tại';
       }
     } catch (e) {
       print('Error: $e');
@@ -95,22 +97,32 @@ class _ProductDetailScreenState
     }
   }
 
-
   int _imageIndex = 0;
   String? _selectedSize;
 
-
   @override
   Widget build(BuildContext context) {
-    double? latitude = Provider.of<AppData>(context).pickUpAddress!.latitude;
-
-    double? logitude = Provider.of<AppData>(context).pickUpAddress!.longitude;
+    final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
+        .collection('products')
+        .where(
+      'category',
+      isEqualTo: widget.productData['category'],
+    )
+        .snapshots();
+    // double? latitude = Provider.of<AppData>(context).pickUpAddress?.latitude;
+    //
+    // double? logitude = Provider.of<AppData>(context).pickUpAddress?.longitude;
     final _cartProvider = ref.read(cartProvider.notifier);
-    LatLng customerLatLng = LatLng(
-        latitude!, logitude!); // Replace with customer address coordinates
-    LatLng vendorLatLng =
-        LatLng(widget.productData['latitude'], widget.productData['longitude']);
-    bool isInCart = _cartProvider.getCartItems.containsKey(widget.productData['productID']);
+
+    // LatLng customerLatLng = LatLng(
+    //     latitude!, logitude!); // Replace with customer address coordinates
+    // LatLng vendorLatLng =
+    //     LatLng(widget.productData['latitude'], widget.productData['longitude']);
+    bool isInCart =
+        _cartProvider.getCartItems.containsKey(widget.productData['productID']);
+    double baseWidth = 428;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -184,7 +196,9 @@ class _ProductDetailScreenState
                     Row(
                       children: [
                         Icon(Icons.local_mall),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Text(
                           widget.productData['productName'],
                           style: TextStyle(
@@ -214,8 +228,9 @@ class _ProductDetailScreenState
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'Product Description',
-                            style: TextStyle(
+                            'Mô tả Sản phẩm',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
                               color: Colors.pink,
                             ),
                           ),
@@ -241,8 +256,9 @@ class _ProductDetailScreenState
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'Product Quantity',
-                            style: TextStyle(
+                            'Số lượng sản phẩm',
+                            style: GoogleFonts.getFont(
+                              'Roboto',
                               color: Colors.pink,
                             ),
                           ),
@@ -265,39 +281,48 @@ class _ProductDetailScreenState
                     ),
                     widget.productData['category'] == 'clothes' ||
                             widget.productData['category'] == 'shoes'
-                        ? ExpansionTile(
-                            title: Text(
-                              'VARIATION AVAILABLE',
-                              style: TextStyle(
+                        ? Column(
+                          children: [
+                            Text(
+                              'Size sản phẩm:',
+                              style: GoogleFonts.getFont(
+                                'Roboto',
                                 fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.pinkAccent
                               ),
                             ),
-                            children: [
-                              Container(
-                                height: 50,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount:
-                                        widget.productData['sizeList'].length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          color: _selectedSize ==
-                                                  widget.productData['sizeList']
-                                                      [index]
-                                              ? Colors.green
-                                              : null,
-                                          child: OutlinedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                _selectedSize = widget
-                                                        .productData['sizeList']
-                                                    [index];
-                                              });
+                            Container(
+                              height: 50,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:
+                                      widget.productData['sizeList'].length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                          color: _selectedSize == widget.productData['sizeList'][index]
+                                              ? Colors.pink
+                                              : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          border: Border.all(
+                                            color: Colors.green,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              _selectedSize = widget
+                                                      .productData['sizeList']
+                                                  [index];
+                                            });
 
-                                              print(_selectedSize);
-                                            },
+                                          },
+                                          child: Center(
                                             child: Text(
                                               widget.productData['sizeList']
                                                   [index],
@@ -307,11 +332,12 @@ class _ProductDetailScreenState
                                             ),
                                           ),
                                         ),
-                                      );
-                                    }),
-                              )
-                            ],
-                          )
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ],
+                        )
                         : SizedBox(),
                   ],
                 ),
@@ -341,8 +367,9 @@ class _ProductDetailScreenState
                   ),
                 ),
                 subtitle: Text(
-                  'SEE PROFILE',
-                  style: TextStyle(
+                  'XEM HỒ SƠ NGƯỜI BÁN',
+                  style: GoogleFonts.getFont(
+                    'Roboto',
                     fontWeight: FontWeight.bold,
                     color: Colors.pink,
                   ),
@@ -362,8 +389,9 @@ class _ProductDetailScreenState
 
                       return Center(
                         child: Text(
-                          'No Review For this Product Yet',
-                          style: TextStyle(
+                          'Không có đánh giá cho sản phẩm này',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                             color: Colors.pink,
@@ -458,12 +486,18 @@ class _ProductDetailScreenState
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => AllReviewsScreen(
-                                      productID: widget.productData['productID'],
+                                      productID:
+                                          widget.productData['productID'],
                                     ),
                                   ),
                                 );
                               },
-                              child: Text('See All Reviews'),
+                              child: Text(
+                                'Xem tất cả đánh giá',
+                                style: GoogleFonts.getFont(
+                                  'Roboto',
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -481,72 +515,104 @@ class _ProductDetailScreenState
               SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 280,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                  ),
-                  child: GoogleMap(
-                    polylines: {
-                      Polyline(
-                        polylineId: PolylineId('customer_vendor_id'),
-                        points: [
-                          customerLatLng,
-                          vendorLatLng,
-                        ],
-                        color: Colors.pink,
-                        width: 4,
-                      )
-                    },
-                    markers: Set<Marker>.from([
-                      Marker(
-                        markerId: MarkerId('seller_store'),
-                        position: LatLng(widget.productData['latitude'],
-                            widget.productData['longitude']),
-                        infoWindow: InfoWindow(title: 'Seller Location'),
-                        onTap: () {
-                          // Handle marker tap event
-                        },
-                      ),
-                    ]),
-                    circles: Set<Circle>.from([
-                      Circle(
-                        circleId: CircleId('circle_1'),
-                        // Provide a unique ID for the circle
-                        center: LatLng(widget.productData['latitude'],
-                            widget.productData['longitude']),
-                        // Set the center position of the circle
-                        radius: 1000,
-                        // Set the radius of the circle in meters
-                        fillColor: Colors.pink.withOpacity(0.2),
-                        // Set the fill color of the circle
-                        strokeColor: Colors.pink,
-                        // Set the stroke color of the circle
-                        strokeWidth: 2, // Set the stroke width of the circle
-                      ),
-                    ]),
-                    mapType: MapType.normal,
-                    initialCameraPosition: CameraPosition(
-                        zoom: 14,
-                        target: LatLng(widget.productData['latitude'],
-                            widget.productData['longitude'])),
-                    onMapCreated: (GoogleMapController controller) {
-                      setState(() {
-                        _controller.complete(controller);
-                      });
-                    },
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Container(
+              //     height: 280,
+              //     decoration: BoxDecoration(
+              //       color: Colors.grey,
+              //     ),
+              //     child: GoogleMap(
+              //       polylines: {
+              //         Polyline(
+              //           polylineId: PolylineId('customer_vendor_id'),
+              //           points: [
+              //             customerLatLng,
+              //             vendorLatLng,
+              //           ],
+              //           color: Colors.pink,
+              //           width: 4,
+              //         )
+              //       },
+              //       markers: Set<Marker>.from([
+              //         Marker(
+              //           markerId: MarkerId('seller_store'),
+              //           position: LatLng(widget.productData['latitude'],
+              //               widget.productData['longitude']),
+              //           infoWindow: InfoWindow(title: 'Seller Location'),
+              //           onTap: () {
+              //             // Handle marker tap event
+              //           },
+              //         ),
+              //       ]),
+              //       circles: Set<Circle>.from([
+              //         Circle(
+              //           circleId: CircleId('circle_1'),
+              //           // Provide a unique ID for the circle
+              //           center: LatLng(widget.productData['latitude'],
+              //               widget.productData['longitude']),
+              //           // Set the center position of the circle
+              //           radius: 1000,
+              //           // Set the radius of the circle in meters
+              //           fillColor: Colors.pink.withOpacity(0.2),
+              //           // Set the fill color of the circle
+              //           strokeColor: Colors.pink,
+              //           // Set the stroke color of the circle
+              //           strokeWidth: 2, // Set the stroke width of the circle
+              //         ),
+              //       ]),
+              //       mapType: MapType.normal,
+              //       initialCameraPosition: CameraPosition(
+              //           zoom: 14,
+              //           target: LatLng(widget.productData['latitude'],
+              //               widget.productData['longitude'])),
+              //       onMapCreated: (GoogleMapController controller) {
+              //         setState(() {
+              //           _controller.complete(controller);
+              //         });
+              //       },
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 70,
+              ),
+              Text(
+                'Related Products',
+                style: GoogleFonts.roboto(
+                  fontSize: 17,
+                ),
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _productsStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return Container(
+                    height: 350,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final productData = snapshot.data!.docs[index];
+                        return ProductDetailModel(
+                          productData: productData, fem: fem,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             ],
           ),
         ),
-
         bottomSheet: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -559,7 +625,8 @@ class _ProductDetailScreenState
                       return; // Not taking action when the product is out of stock
                     }
 
-                    if (_cartProvider.getCartItems.containsKey(widget.productData['productID'])) {
+                    if (_cartProvider.getCartItems
+                        .containsKey(widget.productData['productID'])) {
                       return; // Not taking action when the product is already in the cart
                     }
 
@@ -573,13 +640,15 @@ class _ProductDetailScreenState
                         widget.productData['productPrice'],
                         widget.productData['vendorId'],
                         '',
+                        widget.productData['shippingCharge']
                       );
-                      isInCart = true; // Update the status of the product as added to the cart
+                      isInCart =
+                          true; // Update the status of the product as added to the cart
                       setState(() {});
 
                       Get.snackbar(
-                        'ITEM ADDED',
-                        'You Added ${widget.productData['productName']} To Your Cart',
+                        'SẢN PHẨM ĐÃ ĐƯỢC THÊM',
+                        'Bạn đã thêm ${widget.productData['productName']} vào giỏ hàng',
                         margin: EdgeInsets.all(20),
                         snackPosition: SnackPosition.BOTTOM,
                         backgroundColor: Colors.pink.shade900,
@@ -589,13 +658,12 @@ class _ProductDetailScreenState
                       if (_selectedSize == null) {
                         // Display a notification if the size hasn't been selected
                         Get.snackbar(
-                          'PRODUCT SIZE',
-                          'Please Select A Size',
+                          'SIZE SẢN PHẨM',
+                          'Vui lòng chọn một size',
                           margin: EdgeInsets.all(20),
                           backgroundColor: Colors.pink.shade900,
                           colorText: Colors.white,
                         );
-
                       } else {
                         // Add the product to the cart if the size has been selected
                         _cartProvider.addProductToCart(
@@ -606,10 +674,16 @@ class _ProductDetailScreenState
                           widget.productData['productPrice'],
                           widget.productData['vendorId'],
                           _selectedSize!,
+                          widget.productData['shippingCharge'],
                         );
+
+                        isInCart =
+                        true; // Update the status of the product as added to the cart
+                        setState(() {});
+
                         Get.snackbar(
-                          'ITEM ADDED',
-                          'You Added ${widget.productData['productName']} To Your Cart',
+                          'SẢN PHẨM ĐÃ ĐƯỢC THÊM',
+                          'Bạn đã thêm ${widget.productData['productName']} vào giỏ hàng',
                           margin: EdgeInsets.all(20),
                           snackPosition: SnackPosition.BOTTOM,
                           backgroundColor: Colors.pink.shade900,
@@ -620,7 +694,8 @@ class _ProductDetailScreenState
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: isInCart || _cartProvider.getCartItems.containsKey(
+                      color: isInCart ||
+                              _cartProvider.getCartItems.containsKey(
                                   widget.productData['productID']) ||
                               widget.productData['quantity'] == 0
                           ? Colors.grey
@@ -631,40 +706,40 @@ class _ProductDetailScreenState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: Icon(CupertinoIcons.cart,
                               color: Colors.white, size: 25),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: widget.productData['quantity'] == 0
                               ? Text(
-                                  'PRODUCT IS OUT',
+                                  'SẢN PHẨM HẾT HÀNG',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     letterSpacing: 1,
                                   ),
                                 )
                               : _cartProvider.getCartItems.containsKey(
                                       widget.productData['productID'])
                                   ? Text(
-                                      'IN CART',
+                                      'TRONG GIỎ HÀNG',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        letterSpacing: 5,
+                                        fontSize: 16,
+                                        letterSpacing: 1,
                                       ),
                                     )
                                   : Text(
-                                      'ADD TO CART',
+                                      'THÊM VÀO GIỎ HÀNG',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        letterSpacing: 5,
+                                        fontSize: 16,
+                                        letterSpacing: 1,
                                       ),
                                     ),
                         ),

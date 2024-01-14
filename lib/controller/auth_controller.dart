@@ -42,43 +42,69 @@ class AuthController extends GetxController {
 
 //Function to create new user
   Future<String> createUser(
-    String fullName,
-    String telephone,
-    String email,
-    String password,
-    Uint8List? image,
-  ) async {
-    String res = 'some error occured';
+      String fullName,
+      String telephone,
+      String email,
+      String password,
+      Uint8List? image,
+      ) async {
+    String res = 'some error occurred';
 
     try {
-      if (image != null) {
-        //Create new user in Firebase Auth
-        UserCredential cred = await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
+      // Check if the email address already exists in Authentication
+      List<String> methods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
 
-        String profileImageUrl = await _uploadProfileImageToStorage(image);
-
-        await _firestore.collection('buyers').doc(cred.user!.uid).set({
-          'longitude': '',
-          'latitude': '',
-          'placeName': '',
-          'fullName': fullName,
-          'telephone': telephone,
-          'email': email,
-          'userImage': profileImageUrl,
-          'buyerID': cred.user!.uid,
-        });
-
-        res = 'success';
+      // If email address already exists, error message
+      if (methods.isNotEmpty) {
+        res = 'Email đã tồn tại. Xin vui lòng sử dụng một địa chỉ email khác.';
       } else {
-        res = 'please Fields must be field in';
+        if (image != null) {
+          UserCredential cred = await _auth.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+
+          String profileImageUrl = await _uploadProfileImageToStorage(image);
+
+          await _firestore.collection('buyers').doc(cred.user!.uid).set({
+            'longitude': '',
+            'latitude': '',
+            'placeName': '',
+            'fullName': fullName,
+            'telephone': telephone,
+            'email': email,
+            'userImage': profileImageUrl,
+            'buyerID': cred.user!.uid,
+          });
+
+          res = 'success';
+        } else {
+          res = 'Vui lòng điền đầy đủ thông tin';
+        }
       }
     } catch (e) {
-      res = e.toString();
+      // Custom error messages based on the error type
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case 'email-already-in-use':
+            res = 'Địa chỉ email đã tồn tại. Vui lòng sử dụng địa chỉ email khác.';
+            break;
+          case 'invalid-email':
+            res = 'Địa chỉ email không hợp lệ.';
+            break;
+        // Handle other error codes as needed
+          default:
+            res = 'Đã xảy ra lỗi: ${e.message}';
+        }
+      } else {
+        res = 'Đã xảy ra lỗi: $e';
+      }
     }
 
     return res;
   }
+
+
 
 //Function to login user
 
@@ -86,7 +112,7 @@ class AuthController extends GetxController {
     String email,
     String password,
   ) async {
-    String res = 'some error occured';
+    String res = 'some error occurred';
 
     try {
       //Create new user in Firebase Auth
@@ -109,14 +135,14 @@ class AuthController extends GetxController {
 
     try {
       if (!isValidEmail(email)) {
-        res = 'Invalid email format';
+        res = 'Định dạng email không hợp lệ';
       } else {
         if (email.isNotEmpty) {
           await _auth.sendPasswordResetEmail(email: email);
           res = 'success';
           print('A reset link has been sent to your email');
         } else {
-          res = 'Email field must not be empty';
+          res = 'Email không được để trống';
         }
       }
     } catch (e) {
