@@ -71,7 +71,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popUntil(context, ModalRoute.withName('/cart'));
+            Navigator.pop(context);
           },
         ),
         automaticallyImplyLeading: true,

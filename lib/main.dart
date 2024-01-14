@@ -20,6 +20,7 @@ import 'package:nqt_shop_app/views/screens/cart_screen.dart';
 import 'package:nqt_shop_app/views/screens/category_screen.dart';
 import 'package:nqt_shop_app/views/screens/chat_screen.dart';
 import 'package:nqt_shop_app/views/screens/home_screen.dart';
+import 'package:nqt_shop_app/views/screens/main_screen.dart';
 import 'package:nqt_shop_app/views/screens/order_screen.dart';
 import 'package:nqt_shop_app/views/screens/search_screen.dart';
 import 'package:nqt_shop_app/views/screens/wishlist_screen.dart';
@@ -103,6 +104,7 @@ class MyApp extends StatelessWidget {
         '/vendorUpload': (context) => UploadScreen(),
         '/vendorChat': (context) => VendorHomeChatScreen(),
         '/vendorOrders': (context) => VendorOrderScreen(),
+        '/main': (context) => MainScreen(),
 
       },
       debugShowCheckedModeBanner: false,

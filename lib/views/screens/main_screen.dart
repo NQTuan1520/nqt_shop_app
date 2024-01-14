@@ -25,8 +25,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
   List<String> _tabTitles = [
     'Menu',
-    'Home',
-    'Account',
+    'Trang chủ',
+    'Tài khoản',
   ];
 
   @override

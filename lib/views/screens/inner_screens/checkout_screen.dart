@@ -17,7 +17,9 @@ import '../../../models/cart_models.dart';
 
 class CheckoutScreen extends ConsumerStatefulWidget {
   final List<Map<dynamic, dynamic>> selectedProducts;
-  const CheckoutScreen({Key? key, required this.selectedProducts}) : super(key: key);
+
+  const CheckoutScreen({Key? key, required this.selectedProducts})
+      : super(key: key);
 
   @override
   _CheckoutScreenState createState() => _CheckoutScreenState();
@@ -29,7 +31,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   bool paymentCompleted = false;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String? lastOrderID;
-
 
   TextEditingController _placeNameController = TextEditingController();
 
@@ -47,7 +48,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     try {
       String customerId = await createStripeCustomer(email, name);
       paymentIntent = await createPaymentIntent(productPrice, customerId);
-
 
       var gpay = stripe.PaymentSheetGooglePay(
         merchantCountryCode: "US",
@@ -211,7 +211,8 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
               TextButton(
                 onPressed: () {
                   // Navigator.popUntil(context, ModalRoute.withName('/cart'));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
                     return TransactionScreen(orderID: lastOrderID);
                   }));
                 },
@@ -355,15 +356,13 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 data['fullName'],
                 context,
               );
-            } catch (e) {
-            }
+            } catch (e) {}
           }
 
           void _onCashOnDeliveryPressed(BuildContext context) {
             try {
               _updateFirestore(context);
-            } catch (e) {
-            }
+            } catch (e) {}
           }
 
           void _showPaymentOptions(BuildContext context) {
@@ -375,7 +374,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                     children: <Widget>[
                       ListTile(
                         leading: Icon(Icons.monetization_on),
-                        title: Text('Cash on Delivery'),
+                        title: Text(
+                          'Thanh toán tại nhà',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                          ),
+                        ),
                         onTap: () {
                           _onCashOnDeliveryPressed(context);
                           Navigator.pop(context);
@@ -383,7 +387,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                       ),
                       ListTile(
                         leading: Icon(Icons.credit_card),
-                        title: Text('Stripe'),
+                        title: Text(
+                          'Thanh toán bằng thẻ tín dụng',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                          ),
+                        ),
                         onTap: () {
                           _onStripePressed(context);
                           Navigator.pop(context);
@@ -449,12 +458,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                     ),
                   ),
                 ),
-
                 Expanded(
                   child: ListView.builder(
                     itemCount: _cartProvider.getCartItems.length,
                     itemBuilder: (context, index) {
-                      final cartData = _cartProvider.getCartItems.values.toList()[index];
+                      final cartData =
+                          _cartProvider.getCartItems.values.toList()[index];
                       final product = widget.selectedProducts[index];
                       return Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -470,7 +479,8 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
@@ -482,7 +492,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                                       ),
                                     ),
                                     Text(
-                                      '\$' + " " + cartData.price.toStringAsFixed(2),
+                                      '\$' +
+                                          " " +
+                                          cartData.price.toStringAsFixed(2),
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -533,7 +545,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    width: MediaQuery.of(context).size.width -50,
+                    width: MediaQuery.of(context).size.width - 50,
                     height: 50,
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -569,7 +581,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
               ],
             ),
           );
-
         }
 
         return Center(

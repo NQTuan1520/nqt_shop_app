@@ -130,7 +130,7 @@ class TransactionScreen extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/order');
+                  Navigator.popUntil(context, ModalRoute.withName('/cart'));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -142,7 +142,7 @@ class TransactionScreen extends StatelessWidget {
                   onPrimary: Colors.white,
                 ),
                 child: Text(
-                  'Tới Giỏ Hàng',
+                  'Xác nhận',
                   style: TextStyle(fontSize: 16),
                 ),
               ),
