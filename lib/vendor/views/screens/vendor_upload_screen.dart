@@ -128,7 +128,13 @@ class _UploadScreenState extends State<UploadScreen> {
                     .get();
                 final productID = Uuid().v4();
                 if (_formKey.currentState!.validate()) {
-
+                  Fluttertoast.showToast(
+                    msg: 'Vui lòng điền đủ các thông tin!',
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.BOTTOM,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                  );
                   if (_productProvider.productData['imageUrl'] == null ||
                       _productProvider.productData['imageUrl'].isEmpty) {
                     Fluttertoast.showToast(
@@ -139,10 +145,20 @@ class _UploadScreenState extends State<UploadScreen> {
                       textColor: Colors.white,
                     );
                     return;
-                  } else if (_productProvider.productData['chargeShipping'] ==
-                      null) {
+                  } else if (_productProvider.productData['chargeShipping'] == null ||
+                      _productProvider.productData['chargeShipping'].isEmpty) {
                     Fluttertoast.showToast(
                       msg: 'Vui lòng thêm Phí vận chuyển!',
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                    );
+                    return;
+                  } else if (_productProvider.productData['brandName'] == null ||
+                      _productProvider.productData['brandName'].isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: 'Vui lòng thêm Nhãn !',
                       toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.BOTTOM,
                       backgroundColor: Colors.red,

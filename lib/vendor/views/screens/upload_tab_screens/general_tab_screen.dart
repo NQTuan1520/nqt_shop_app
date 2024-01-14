@@ -49,129 +49,131 @@ class _GeneralScreenState extends State<GeneralScreen>
   Widget build(BuildContext context) {
     super.build(context);
     final ProductProvider _productProvider =
-    Provider.of<ProductProvider>(context);
+        Provider.of<ProductProvider>(context);
     return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SingleChildScrollView(
-            child: Column(
+      padding: const EdgeInsets.all(10.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextFormField(
+              validator: ((value) {
+                if (value!.isEmpty) {
+                  return 'Hãy điền tên sản phẩm!';
+                } else {
+                  return null;
+                }
+              }),
+              onChanged: (value) {
+                _productProvider.getFormData(productName: value);
+              },
+              decoration: InputDecoration(
+                labelText: 'Điền tên sản phẩm',
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              validator: ((value) {
+                if (value!.isEmpty) {
+                  return 'Hãy điền giá sản phẩm!';
+                } else {
+                  return null;
+                }
+              }),
+              onChanged: (value) {
+                _productProvider.getFormData(productPrice: double.parse(value));
+              },
+              decoration: InputDecoration(
+                labelText: 'Điền giá sản phẩm',
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              validator: ((value) {
+                if (value!.isEmpty) {
+                  return 'Hãy điền số lượng sản phẩm!';
+                } else {
+                  return null;
+                }
+              }),
+              onChanged: (value) {
+                _productProvider.getFormData(quantity: int.parse(value));
+              },
+              decoration: InputDecoration(
+                labelText: 'Điền số lượng sản phẩm',
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            DropdownButtonFormField(
+                hint: Text('Hãy chọn danh mục sản phẩm'),
+                items: _categoryList.map<DropdownMenuItem<String>>((e) {
+                  return DropdownMenuItem(value: e, child: Text(e));
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _productProvider.getFormData(category: value);
+                  });
+                }),
+            SizedBox(
+              height: 30,
+            ),
+            TextFormField(
+              validator: ((value) {
+                if (value!.isEmpty) {
+                  return 'Hãy điền thông tin giới thiệu về sản phẩm!';
+                } else {
+                  return null;
+                }
+              }),
+              onChanged: (value) {
+                _productProvider.getFormData(description: value);
+              },
+              minLines: 3,
+              maxLines: 10,
+              maxLength: 800,
+              decoration: InputDecoration(
+                labelText: 'Điền thông tin giới thiệu về sản phẩm',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            Row(
               children: [
-                TextFormField(
-                  validator: ((value) {
-                    if (value!.isEmpty) {
-                      return 'Hãy điền tên sản phẩm!';
-                    } else {
-                      return null;
-                    }
-                  }),
-                  onChanged: (value) {
-                    _productProvider.getFormData(productName: value);
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Điền tên sản phẩm',
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  validator: ((value) {
-                    if (value!.isEmpty) {
-                      return 'Hãy điền giá sản phẩm!';
-                    } else {
-                      return null;
-                    }
-                  }),
-                  onChanged: (value) {
-                    _productProvider.getFormData(productPrice: double.parse(value));
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Điền giá sản phẩm',
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  validator: ((value) {
-                    if (value!.isEmpty) {
-                      return 'Hãy điền số lượng sản phẩm!';
-                    } else {
-                      return null;
-                    }
-                  }),
-                  onChanged: (value) {
-                    _productProvider.getFormData(quantity: int.parse(value));
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Điền số lượng sản phẩm',
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                DropdownButtonFormField(
-                    hint: Text('Hãy chọn danh mục sản phẩm'),
-                    items: _categoryList.map<DropdownMenuItem<String>>((e) {
-                      return DropdownMenuItem(value: e, child: Text(e));
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _productProvider.getFormData(category: value);
-                      });
-                    }),
-                SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  validator: ((value) {
-                    if (value!.isEmpty) {
-                      return 'Hãy điền thông tin giới thiệu về sản phẩm!';
-                    } else {
-                      return null;
-                    }
-                  }),
-                  onChanged: (value) {
-                    _productProvider.getFormData(description: value);
-                  },
-                  minLines: 3,
-                  maxLines: 10,
-                  maxLength: 800,
-                  decoration: InputDecoration(
-                    labelText: 'Điền thông tin giới thiệu về sản phẩm',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        showDatePicker(
+                TextButton(
+                  onPressed: () {
+                    showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime.now(),
                             lastDate: DateTime(5000))
-                            .then((value) {
-                          setState(() {
-                            _productProvider.getFormData(scheduleDate: value);
-                          });
-                        });
-                      },
-                      child: Text('Lịch đăng tải'),
-                    ),
-                    if (_productProvider.productData['scheduleDate'] != null)
-                      Text(
-                        formatedDate(
-                          _productProvider.productData['scheduleDate'],
-                        ),
-                      ),
-                  ],
+                        .then((value) {
+                      setState(() {
+                        _productProvider.getFormData(scheduleDate: value);
+                      });
+                    });
+                  },
+                  child: Text('Lịch đăng tải'),
                 ),
+                if (_productProvider.productData['scheduleDate'] != null)
+                  Text(
+                    formatedDate(
+                      _productProvider.productData['scheduleDate'],
+                    ),
+                  ),
               ],
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    ));
   }
 }
