@@ -29,21 +29,21 @@ class VendorMenuScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16),
         children: [
-          _buildMenuItem(context, 'Doanh thu', '/vendorEarnings', Icons.category,
-              Colors.redAccent),
-          _buildMenuItem(context, 'Đăng tải sản phẩm', '/vendorUpload', Icons.shopping_cart,
-              Colors.greenAccent),
-          _buildMenuItem(
-              context, 'Đơn hàng', '/vendorOrders', Icons.shop, Colors.purpleAccent),
-          _buildMenuItem(context, 'Thông báo tin nhắn', '/vendorChat', Icons.chat,
-              Colors.indigoAccent),
+          _buildMenuItem(context, 'Doanh thu', '/vendorEarnings',
+              Icons.category, [Colors.red[500]!, Colors.redAccent]),
+          _buildMenuItem(context, 'Đăng tải sản phẩm', '/vendorUpload',
+              Icons.shopping_cart, [Colors.green[500]!, Colors.greenAccent]),
+          _buildMenuItem(context, 'Đơn hàng', '/vendorOrders', Icons.shop,
+              [Colors.purple[500]!, Colors.purpleAccent]),
+          _buildMenuItem(context, 'Thông báo tin nhắn', '/vendorChat',
+              Icons.chat, [Colors.indigo[500]!, Colors.indigoAccent]),
         ],
       ),
     );
   }
 
   Widget _buildMenuItem(BuildContext context, String title, String route,
-      IconData icon, Color color) {
+      IconData icon, List<Color> gradientColors) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8),
       elevation: 12,
@@ -52,23 +52,34 @@ class VendorMenuScreen extends StatelessWidget {
       ),
       child: Material(
         borderRadius: BorderRadius.circular(15),
-        color: color,
+        color: Colors.transparent,
         child: InkWell(
           onTap: () {
             Navigator.pushNamed(context, route);
           },
           borderRadius: BorderRadius.circular(15),
-          child: ListTile(
-            leading: Icon(
-              icon,
-              color: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                colors: gradientColors,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                tileMode: TileMode.clamp,
+              ),
             ),
-            title: Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            child: ListTile(
+              leading: Icon(
+                icon,
                 color: Colors.white,
+              ),
+              title: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

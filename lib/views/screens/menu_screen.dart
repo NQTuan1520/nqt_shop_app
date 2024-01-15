@@ -30,24 +30,25 @@ class MenuScreen extends StatelessWidget {
         padding: EdgeInsets.all(16),
         children: [
           _buildMenuItem(context, 'Danh mục sản phẩm', '/category', Icons.category,
-              Colors.blueAccent),
+              [Colors.blue[500]!, Colors.blueAccent]),
           _buildMenuItem(context, 'Giỏ hàng', '/cart', Icons.shopping_cart,
-              Colors.greenAccent),
+              [Colors.green[500]!, Colors.greenAccent]),
           _buildMenuItem(context, 'Danh sách yêu thích', '/wishlist', Icons.favorite,
-              Colors.redAccent),
-          _buildMenuItem(
-              context, 'Tìm kiếm', '/search', Icons.search, Colors.orangeAccent),
-          _buildMenuItem(
-              context, 'Đơn hàng', '/order', Icons.shop, Colors.purpleAccent),
+              [Colors.red[500]!, Colors.redAccent]),
+          _buildMenuItem(context, 'Tìm kiếm', '/search', Icons.search,
+              [Colors.orange[500]!, Colors.orangeAccent]),
+          _buildMenuItem(context, 'Đơn hàng', '/order', Icons.shop,
+              [Colors.purple[500]!, Colors.purpleAccent]),
           _buildMenuItem(context, 'Thông báo tin nhắn', '/chat', Icons.chat,
-              Colors.indigoAccent),
+              [Colors.indigo[500]!, Colors.indigoAccent]),
+
         ],
       ),
     );
   }
 
   Widget _buildMenuItem(BuildContext context, String title, String route,
-      IconData icon, Color color) {
+      IconData icon, List<Color> gradientColors) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8),
       elevation: 12,
@@ -56,24 +57,35 @@ class MenuScreen extends StatelessWidget {
       ),
       child: Material(
         borderRadius: BorderRadius.circular(15),
-        color: color,
+        color: Colors.transparent,
         child: InkWell(
           onTap: () {
             Navigator.pushNamed(context, route);
           },
           borderRadius: BorderRadius.circular(15),
-          child: ListTile(
-            leading: Icon(
-              icon,
-              color: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                colors: gradientColors,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                tileMode: TileMode.clamp,
+              ),
             ),
-            title: Text(
-              title,
-              style: GoogleFonts.getFont(
-                'Roboto',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            child: ListTile(
+              leading: Icon(
+                icon,
                 color: Colors.white,
+              ),
+              title: Text(
+                title,
+                style: GoogleFonts.getFont(
+                  'Roboto',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -81,4 +93,5 @@ class MenuScreen extends StatelessWidget {
       ),
     );
   }
+
 }
