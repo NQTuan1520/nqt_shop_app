@@ -70,6 +70,43 @@ class TransactionScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Thanh toán thành công',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                        size: 30,
+                      ),
+                    ],
+                  ),
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 100,),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(100)),
+                        border: Border.all(
+                          color: Colors.green,
+                        ),
+                      ),
+                      child: Text(
+                        '\$'+ ' '+ '${transaction['productPrice']}',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
                   Column(
                     children: [
                       Padding(
@@ -77,24 +114,6 @@ class TransactionScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Thành công',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.check,
-                                  color: Colors.green,
-                                  size: 30,
-                                ),
-                              ],
-                            ),
                             SizedBox(height: 15),
                             buildInfoRow('Sản phẩm:', transaction['productName']),
                             buildDivider(),
