@@ -22,7 +22,7 @@ class _ElectronicProductsWidgetState extends State<ElectronicProductsWidget> {
     super.initState();
     _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', whereIn: ['Laptop','Phone']).where('approved', isEqualTo: true)
+        .where('category', whereIn: ['Máy tính','Điện thoại']).where('approved', isEqualTo: true)
         .snapshots();
     _startAutoScroll();
   }

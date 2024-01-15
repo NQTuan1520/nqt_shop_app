@@ -22,7 +22,7 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
     super.initState();
     _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', whereIn: ['shoes', '']).where('approved', isEqualTo: true)
+        .where('category', whereIn: ['Thời trang', 'Giày']).where('approved', isEqualTo: true)
         .snapshots();
     _startAutoScroll();
   }

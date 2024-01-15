@@ -69,8 +69,6 @@ class VendorController {
       String countryValue,
       String stateValue,
       String cityValue,
-      String taxRegistered,
-      String taxNumber,
       Uint8List? image,
       ) async {
     String res = 'some error occured';
@@ -86,8 +84,6 @@ class VendorController {
         'countryValue': countryValue,
         'stateValue': stateValue,
         'cityValue': cityValue,
-        'taxRegistered': taxRegistered,
-        'taxNumber': taxNumber,
         'storeImage': storeImage,
         'approved': false,
         'vendorId': _auth.currentUser!.uid,

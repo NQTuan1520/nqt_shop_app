@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BannerArea(),
           // VendorStore(),
           CategoryItem(),
+          SizedBox(height: 15,),
           ResuseTextWidget(
             title: 'Tất cả sản phẩm',
           ),

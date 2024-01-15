@@ -148,7 +148,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                           children: [
                             Container(
                               margin: EdgeInsets.fromLTRB(
-                                  102 * fem, 0 * fem, 86.56 * fem, 78 * fem),
+                                  70 * fem, 0 * fem, 86.56 * fem, 78 * fem),
                               width: double.infinity,
                               child: Center(
                                 child: SizedBox(
@@ -156,7 +156,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                                     borderRadius:
                                         BorderRadius.circular(7 * fem),
                                     child: Image.asset(
-                                      'assets/images/Illustration.png',
+                                      'assets/images/login-png-2-1-sGm.png',
                                       fit: BoxFit.cover,
                                     ),
                                   ),

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,8 +25,6 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
   late String email;
 
   late String phoneNumber;
-
-  late String taxNumber;
 
   late String stateValue;
 
@@ -49,28 +48,38 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
     });
   }
 
-  String? _taxStatus;
-
-  List<String> _taxOptions = [
-    'CÓ',
-    'KHÔNG',
-  ];
 
   _saveVendorDetail() async {
     EasyLoading.show(status: 'Hãy đợi chút');
     if (_formKey.currentState!.validate()) {
-      await _vendorController
-          .registerVendor(businessName, email, phoneNumber, countryValue,
-          stateValue, cityValue, _taxStatus!, taxNumber, _image)
-          .whenComplete(() {
+      if (_image != null &&
+          countryValue.isNotEmpty &&
+          stateValue.isNotEmpty &&
+          cityValue.isNotEmpty) {
+        await _vendorController
+            .registerVendor(
+            businessName, email, phoneNumber, countryValue, stateValue, cityValue, _image)
+            .whenComplete(() {
+          EasyLoading.dismiss();
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: "Hãy điền đủ thông tin",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
         EasyLoading.dismiss();
-      });
+      }
     } else {
       print('bad');
-
       EasyLoading.dismiss();
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -200,66 +209,15 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Mã Số Thuế?',
-                            style: GoogleFonts.getFont(
-                              'Roboto',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Flexible(
-                            child: Container(
-                              width: 100,
-                              child: DropdownButtonFormField(
-                                  hint: Text('Chọn'),
-                                  items: _taxOptions
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                            value: value, child: Text(value));
-                                      }).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _taxStatus = value;
-                                    });
-                                  }),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    if (_taxStatus == 'CÓ')
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          onChanged: (value) {
-                            taxNumber = value;
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Vui lòng mã số thuế không được để trống ';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(labelText: 'Mã Số Thuế'),
-                        ),
-                      ),
                     SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                     InkWell(
                       onTap: () {
                         _saveVendorDetail();
                       },
                       child: Container(
-                        height: 30,
+                        height: 40,
                         width: MediaQuery.of(context).size.width - 40,
                         decoration: BoxDecoration(
                           color: Colors.yellow.shade900,

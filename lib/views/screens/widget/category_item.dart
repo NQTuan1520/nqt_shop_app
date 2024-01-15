@@ -83,15 +83,15 @@ class CategoryItem extends StatelessWidget {
                     Container(
                       width: screenWidth * 0.18,
                       height: screenWidth * 0.18,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFF336699),
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          screenWidth * 0.09,
-                        ),
-                      ),
+                      // clipBehavior: Clip.antiAlias,
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     color: const Color(0xFF336699),
+                      //   ),
+                      //   borderRadius: BorderRadius.circular(
+                      //     screenWidth * 0.09,
+                      //   ),
+                      // ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Image.network(

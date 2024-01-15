@@ -37,28 +37,14 @@ class WelcomeLoginScreen extends StatelessWidget {
             ),
             Positioned(
               left: screenWidth * 0.024,
-              top: screenHeight * 0.151,
+              top: screenHeight * 0.06,
               child: Image.asset(
-                'assets/images/Illustration.png',
+                'assets/images/login-png-2-1-sGm.png',
                 width: screenWidth * 0.92,
-                height: screenHeight * 0.523,
+                height: screenHeight * 0.7,
                 fit: BoxFit.cover,
               ),
             ),
-            // Positioned(
-            //   left: screenWidth * 0.178,
-            //   top: screenHeight * 0.065,
-            //   child: ClipRRect(
-            //     borderRadius: BorderRadius.circular(7),
-            //     clipBehavior: Clip.hardEdge,
-            //     child: Image.asset(
-            //       'assets/images/one-famili-2-2.png',
-            //       width: screenWidth * 0.65,
-            //       height: screenHeight * 0.197,
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            // ),
             Positioned(
               left: screenWidth * 0.07,
               top: screenHeight * 0.641,

@@ -14,9 +14,6 @@ class VendorUserModel {
   final String stateValue;
   final String storeImage;
 
-  final String taxNumber;
-
-  final String taxRegistered;
   final String vendorId;
 
   VendorUserModel(
@@ -28,9 +25,7 @@ class VendorUserModel {
         required this.email,
         required this.phoneNumber,
         required this.stateValue,
-        required this.storeImage,
-        required this.taxNumber,
-        required this.taxRegistered});
+        required this.storeImage,});
 
   VendorUserModel.fromJson(Map<String, Object?> json)
       : this(
@@ -43,8 +38,6 @@ class VendorUserModel {
     phoneNumber: json['phoneNumber']! as String,
     stateValue: json['stateValue']! as String,
     storeImage: json['storeImage']! as String,
-    taxNumber: json['taxNumber']! as String,
-    taxRegistered: json['taxRegistered']! as String,
   );
 
   Map<String, Object?> toJson() {
@@ -58,8 +51,6 @@ class VendorUserModel {
       'phoneNumber': phoneNumber,
       'stateValue': stateValue,
       'storeImage': storeImage,
-      'taxNumber': taxNumber,
-      'taxRegistered': taxRegistered,
     };
   }
 }

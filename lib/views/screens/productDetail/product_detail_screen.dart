@@ -239,14 +239,19 @@ class _ProductDetailScreenState
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            widget.productData['description'],
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black87,
-                              letterSpacing: 3,
-                            ),
-                            textAlign: TextAlign.center,
+                          child: Row(
+                            children: [
+                              Text(
+                                widget.productData['description'],
+                                style: GoogleFonts.getFont(
+                                  'Roboto',
+                                  fontSize: 17,
+                                  color: Colors.black87,
+                                  letterSpacing: 0,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
                         ),
                       ],

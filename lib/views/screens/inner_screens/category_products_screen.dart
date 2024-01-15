@@ -58,10 +58,10 @@ class _CategoryProductScreen extends State<CategoryProductScreen> {
           if (snapshot.data!.docs.isEmpty) {
             return Center(
               child: Text(
-                'Không có sản phẩm nào trong\n danh mục này',
+                'Chưa có sản phẩm nào \ntrong danh mục này',
                 style: TextStyle(
                     fontSize: 20,
-                    color: Colors.blue,
+                    color: Colors.indigo,
                     fontWeight: FontWeight.bold),
               ),
             );

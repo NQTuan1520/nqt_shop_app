@@ -166,7 +166,7 @@ class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
                       ),
                       Positioned(
                           left: 10,
-                          top: -10,
+                          top: 0,
                           child: CachedNetworkImage(
                             imageUrl: widget.productData['imageUrl'][0],
                             width: 108,
