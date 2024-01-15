@@ -34,15 +34,15 @@ class _NewProductWidgetState extends State<NewProductWidget> {
 
   void _startAutoScroll() {
     _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (_currentPage < _snapshot.data!.docs.length - 1) {
+      if (_currentPage < _snapshot.data!.docs.length - 2) {
         _currentPage++;
       } else {
         _currentPage = 0;
       }
       _scrollController.animateTo(
-        _currentPage *250,
+        _currentPage *180,
         duration: Duration(milliseconds: 500),
-        curve: Curves.ease,
+        curve: Curves.easeInOut,
       );
     });
   }
