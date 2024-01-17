@@ -5,7 +5,6 @@ class CartModel {
 
   int quantity;
 
-
   final double price;
 
   final String vendorId;
@@ -13,16 +12,16 @@ class CartModel {
   int shippingCharge;
 
   CartModel({
-  required this.productName,
-  required this.productID,
-  required this.imageUrl,
-  required this.quantity,
-  required this.price,
-  required this.vendorId,
+    required this.productName,
+    required this.productID,
+    required this.imageUrl,
+    required this.quantity,
+    required this.price,
+    required this.vendorId,
+    required this.productSize,
+    required this.shippingCharge,
+  });
 
-  required this.productSize,
-  required this.shippingCharge,
-});
   Map<String, dynamic> toMap() {
     return {
       'productName': this.productName,

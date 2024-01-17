@@ -10,6 +10,7 @@ import 'package:nqt_shop_app/views/screens/widget/vendor_stores.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   static const routeName = '/home';
 
   @override
@@ -27,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
           BannerArea(),
           // VendorStore(),
           CategoryItem(),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           ResuseTextWidget(
             title: 'Tất cả sản phẩm',
           ),

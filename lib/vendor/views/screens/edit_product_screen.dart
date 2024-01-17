@@ -12,7 +12,7 @@ class EditProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference users =
-    FirebaseFirestore.instance.collection('vendors');
+        FirebaseFirestore.instance.collection('vendors');
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
@@ -28,7 +28,7 @@ class EditProductScreen extends StatelessWidget {
 
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
-          snapshot.data!.data() as Map<String, dynamic>;
+              snapshot.data!.data() as Map<String, dynamic>;
           return DefaultTabController(
             length: 1,
             child: Scaffold(
@@ -72,8 +72,8 @@ class EditProductScreen extends StatelessWidget {
         }
         return Center(
             child: CircularProgressIndicator(
-              color: Colors.yellow.shade900,
-            ));
+          color: Colors.yellow.shade900,
+        ));
       },
     );
   }

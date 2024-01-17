@@ -11,8 +11,8 @@ class AddressModels extends ChangeNotifier {
 
   AddressModels(
       {this.placeName,
-        this.latitude,
-        this.longitude,
-        this.placeId,
-        this.placeFormattedAddress});
+      this.latitude,
+      this.longitude,
+      this.placeId,
+      this.placeFormattedAddress});
 }

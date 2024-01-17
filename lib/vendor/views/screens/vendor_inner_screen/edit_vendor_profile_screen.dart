@@ -5,7 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditVendorProfileScreen extends StatefulWidget {
   @override
-  _EditVendorProfileScreenState createState() => _EditVendorProfileScreenState();
+  _EditVendorProfileScreenState createState() =>
+      _EditVendorProfileScreenState();
 }
 
 class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
@@ -25,10 +26,12 @@ class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
 
   void loadUserData() async {
     String userId = _auth.currentUser!.uid;
-    DocumentSnapshot userSnapshot = await _firestore.collection('vendors').doc(userId).get();
+    DocumentSnapshot userSnapshot =
+        await _firestore.collection('vendors').doc(userId).get();
 
     if (userSnapshot.exists) {
-      Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
+      Map<String, dynamic> userData =
+          userSnapshot.data() as Map<String, dynamic>;
       setState(() {
         _businessNameController.text = userData['businessName'];
         _phoneNumberController.text = userData['phoneNumber'];
@@ -42,8 +45,12 @@ class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chỉnh sửa hồ sơ', style: GoogleFonts.getFont(
-        'Roboto',),),
+        title: Text(
+          'Chỉnh sửa hồ sơ',
+          style: GoogleFonts.getFont(
+            'Roboto',
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -88,7 +95,6 @@ class _EditVendorProfileScreenState extends State<EditVendorProfileScreen> {
       'phoneNumber': _phoneNumberController.text,
       'email': _emailController.text,
     };
-
 
     Navigator.of(context).pop(updatedUserData);
   }

@@ -22,7 +22,8 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
     super.initState();
     _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', whereIn: ['Thời trang', 'Giày']).where('approved', isEqualTo: true)
+        .where('category', whereIn: ['Thời trang', 'Giày'])
+        .where('approved', isEqualTo: true)
         .snapshots();
     _startAutoScroll();
   }
@@ -42,7 +43,7 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
         _currentPage = 0;
       }
       _scrollController.animateTo(
-        _currentPage *180,
+        _currentPage * 180,
         duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
@@ -53,7 +54,6 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
   Widget build(BuildContext context) {
     double baseWidth = 428;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-
 
     return StreamBuilder<QuerySnapshot>(
       stream: _productsStream,
@@ -91,4 +91,3 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
     );
   }
 }
-

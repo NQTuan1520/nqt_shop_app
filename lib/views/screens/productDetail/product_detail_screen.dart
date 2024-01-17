@@ -48,7 +48,6 @@ class _ProductDetailScreenState
     return total / ratings.length;
   }
 
-
   final String message = 'Hello from my Flutter app!';
   double bottomPadding = 0;
   late GoogleMapController mapController;
@@ -105,9 +104,9 @@ class _ProductDetailScreenState
     final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
         .collection('products')
         .where(
-      'category',
-      isEqualTo: widget.productData['category'],
-    )
+          'category',
+          isEqualTo: widget.productData['category'],
+        )
         .snapshots();
     // double? latitude = Provider.of<AppData>(context).pickUpAddress?.latitude;
     //
@@ -287,62 +286,62 @@ class _ProductDetailScreenState
                     widget.productData['category'] == 'clothes' ||
                             widget.productData['category'] == 'shoes'
                         ? Column(
-                          children: [
-                            Text(
-                              'Size sản phẩm:',
-                              style: GoogleFonts.getFont(
-                                'Roboto',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.pinkAccent
+                            children: [
+                              Text(
+                                'Size sản phẩm:',
+                                style: GoogleFonts.getFont('Roboto',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.pinkAccent),
                               ),
-                            ),
-                            Container(
-                              height: 50,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      widget.productData['sizeList'].length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                          color: _selectedSize == widget.productData['sizeList'][index]
-                                              ? Colors.pink
-                                              : Colors.transparent,
-                                          borderRadius: BorderRadius.circular(8.0),
-                                          border: Border.all(
-                                            color: Colors.green,
-                                            width: 1.0,
+                              Container(
+                                height: 50,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount:
+                                        widget.productData['sizeList'].length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          width: 50,
+                                          decoration: BoxDecoration(
+                                            color: _selectedSize ==
+                                                    widget.productData[
+                                                        'sizeList'][index]
+                                                ? Colors.pink
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                              color: Colors.green,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              _selectedSize = widget
-                                                      .productData['sizeList']
-                                                  [index];
-                                            });
-
-                                          },
-                                          child: Center(
-                                            child: Text(
-                                              widget.productData['sizeList']
-                                                  [index],
-                                              style: TextStyle(
-                                                color: Colors.black,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                _selectedSize = widget
+                                                        .productData['sizeList']
+                                                    [index];
+                                              });
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                widget.productData['sizeList']
+                                                    [index],
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                          ],
-                        )
+                                      );
+                                    }),
+                              ),
+                            ],
+                          )
                         : SizedBox(),
                   ],
                 ),
@@ -608,7 +607,8 @@ class _ProductDetailScreenState
                       itemBuilder: (context, index) {
                         final productData = snapshot.data!.docs[index];
                         return ProductDetailModel(
-                          productData: productData, fem: fem,
+                          productData: productData,
+                          fem: fem,
                         );
                       },
                     ),
@@ -638,15 +638,14 @@ class _ProductDetailScreenState
                     if (widget.productData['category'] != 'clothes' &&
                         widget.productData['category'] != 'shoes') {
                       _cartProvider.addProductToCart(
-                        widget.productData['productName'],
-                        widget.productData['productID'],
-                        widget.productData['imageUrl'],
-                        widget.productData['quantity'],
-                        widget.productData['productPrice'],
-                        widget.productData['vendorId'],
-                        '',
-                        widget.productData['shippingCharge']
-                      );
+                          widget.productData['productName'],
+                          widget.productData['productID'],
+                          widget.productData['imageUrl'],
+                          widget.productData['quantity'],
+                          widget.productData['productPrice'],
+                          widget.productData['vendorId'],
+                          '',
+                          widget.productData['shippingCharge']);
                       isInCart =
                           true; // Update the status of the product as added to the cart
                       setState(() {});
@@ -683,7 +682,7 @@ class _ProductDetailScreenState
                         );
 
                         isInCart =
-                        true; // Update the status of the product as added to the cart
+                            true; // Update the status of the product as added to the cart
                         setState(() {});
 
                         Get.snackbar(

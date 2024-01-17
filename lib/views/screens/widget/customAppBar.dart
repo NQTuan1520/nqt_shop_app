@@ -13,13 +13,13 @@ class CustomAppBar extends StatefulWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> {
   final TextEditingController _currentLocationController =
-  TextEditingController();
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     if (Provider.of<AppData>(context).pickUpAddress != null) {
       String _address =
-      Provider.of<AppData>(context).pickUpAddress!.placeName.toString();
+          Provider.of<AppData>(context).pickUpAddress!.placeName.toString();
 
       _currentLocationController.text = _address;
     }

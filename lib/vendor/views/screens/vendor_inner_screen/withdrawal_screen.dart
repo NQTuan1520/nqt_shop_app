@@ -114,7 +114,8 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: 'Tên tài khoản ngân hàng, ví dụ: Vpbank, LPB,...',
+                    labelText:
+                        'Tên tài khoản ngân hàng, ví dụ: Vpbank, LPB,...',
                   ),
                 ),
                 SizedBox(
@@ -133,7 +134,8 @@ class WithdrawalScreen extends StatelessWidget {
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    labelText: 'Tên tài khoản ngân hàng, ví dụ: Nguyen Quang Tuan,...',
+                    labelText:
+                        'Tên tài khoản ngân hàng, ví dụ: Nguyen Quang Tuan,...',
                   ),
                 ),
                 SizedBox(
@@ -175,7 +177,8 @@ class WithdrawalScreen extends StatelessWidget {
                     } else {
                       print('False');
                     }
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
                       return MainVendorScreen();
                     }));
                   },

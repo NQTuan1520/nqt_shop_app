@@ -140,7 +140,8 @@ class _UploadScreenState extends State<UploadScreen> {
                       textColor: Colors.white,
                     );
                     return;
-                  } else if (_productProvider.productData['chargeShipping'] == null) {
+                  } else if (_productProvider.productData['chargeShipping'] ==
+                      null) {
                     // Xử lý khi phí vận chuyển không được thêm
                     Fluttertoast.showToast(
                       msg: 'Vui lòng thêm Phí vận chuyển!',
@@ -150,7 +151,8 @@ class _UploadScreenState extends State<UploadScreen> {
                       textColor: Colors.white,
                     );
                     return;
-                  } else if (_productProvider.productData['brandName'] == null ||
+                  } else if (_productProvider.productData['brandName'] ==
+                          null ||
                       _productProvider.productData['brandName'].isEmpty) {
                     // Xử lý khi Nhãn hàng không được thêm
                     Fluttertoast.showToast(

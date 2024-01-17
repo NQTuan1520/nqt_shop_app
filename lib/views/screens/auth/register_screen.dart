@@ -421,13 +421,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 1 * fem, 11 * fem),
+                          margin: EdgeInsets.fromLTRB(
+                              0 * fem, 0 * fem, 1 * fem, 11 * fem),
                           width: 450 * fem,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 5 * fem),
+                                margin: EdgeInsets.fromLTRB(
+                                    0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                 child: Text(
                                   'Mật khẩu',
                                   style: GoogleFonts.getFont(
@@ -469,9 +471,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         borderRadius: BorderRadius.circular(9),
                                       ),
                                       disabledBorder: InputBorder.none,
-                                      contentPadding: EdgeInsets.fromLTRB(20 * fem, 18 * fem, 48 * fem, 18 * fem),
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          20 * fem,
+                                          18 * fem,
+                                          48 * fem,
+                                          18 * fem),
                                       hintText: 'Nhập mật khẩu của bạn',
-                                      hintStyle: GoogleFonts.getFont('Roboto', color: Color(0xffbcbcbc)),
+                                      hintStyle: GoogleFonts.getFont('Roboto',
+                                          color: Color(0xffbcbcbc)),
                                     ),
                                     style: GoogleFonts.getFont(
                                       'Roboto',
@@ -487,7 +494,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       });
                                     },
                                     icon: Icon(
-                                      _showPassword ? Icons.visibility : Icons.visibility_off,
+                                      _showPassword
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
                                       color: Color(0xffbcbcbc),
                                     ),
                                   ),

@@ -41,7 +41,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
   Widget build(BuildContext context) {
     super.build(context);
     final ProductProvider _productProvider =
-    Provider.of<ProductProvider>(context);
+        Provider.of<ProductProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -54,21 +54,21 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
             itemBuilder: ((context, index) {
               return index == 0
                   ? Center(
-                child: IconButton(
-                    onPressed: () {
-                      chooseImage();
-                    },
-                    icon: Icon(Icons.add)),
-              )
+                      child: IconButton(
+                          onPressed: () {
+                            chooseImage();
+                          },
+                          icon: Icon(Icons.add)),
+                    )
                   : Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: FileImage(
-                      _image[index - 1],
-                    ),
-                  ),
-                ),
-              );
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: FileImage(
+                            _image[index - 1],
+                          ),
+                        ),
+                      ),
+                    );
             }),
           ),
           SizedBox(
@@ -79,7 +79,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
               EasyLoading.show(status: 'Ảnh đang được lưu');
               for (var img in _image) {
                 Reference ref =
-                _storage.ref().child('productImages').child(Uuid().v4());
+                    _storage.ref().child('productImages').child(Uuid().v4());
 
                 await ref.putFile(img).whenComplete(() async {
                   await ref.getDownloadURL().then((value) {

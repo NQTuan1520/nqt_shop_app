@@ -5,10 +5,12 @@ import '../../../controller/auth_controller.dart';
 
 class VendorForgotPasswordScreen extends StatefulWidget {
   @override
-  State<VendorForgotPasswordScreen> createState() => _VendorForgotPasswordScreenState();
+  State<VendorForgotPasswordScreen> createState() =>
+      _VendorForgotPasswordScreenState();
 }
 
-class _VendorForgotPasswordScreenState extends State<VendorForgotPasswordScreen> {
+class _VendorForgotPasswordScreenState
+    extends State<VendorForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
   bool _isLoading = false;
   String? _errorText;
@@ -18,7 +20,8 @@ class _VendorForgotPasswordScreenState extends State<VendorForgotPasswordScreen>
       _isLoading = true;
     });
 
-    String res = await AuthController.instance.forgotPassword(_emailController.text);
+    String res =
+        await AuthController.instance.forgotPassword(_emailController.text);
 
     setState(() {
       _isLoading = false;
@@ -84,11 +87,15 @@ class _VendorForgotPasswordScreenState extends State<VendorForgotPasswordScreen>
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(width: 5,),
+                SizedBox(
+                  width: 5,
+                ),
                 Icon(Icons.key),
               ],
             ),
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Text(
               'Cung cấp email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn',
               style: GoogleFonts.getFont(
@@ -105,27 +112,21 @@ class _VendorForgotPasswordScreenState extends State<VendorForgotPasswordScreen>
               decoration: InputDecoration(
                 filled: true,
                 hintText: 'Nhập email',
-                hintStyle: GoogleFonts.getFont(
-                    'Roboto'),
+                hintStyle: GoogleFonts.getFont('Roboto'),
                 border: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(9),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(9),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(9),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(9),
                 ),
                 disabledBorder: OutlineInputBorder(
-                  borderRadius:
-                  BorderRadius.circular(9),
+                  borderRadius: BorderRadius.circular(9),
                 ),
                 errorText: _errorText,
               ),
@@ -139,26 +140,25 @@ class _VendorForgotPasswordScreenState extends State<VendorForgotPasswordScreen>
               decoration: BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(20),
-
               ),
               child: Center(
                 child: GestureDetector(
                   onTap: _resetPassword,
                   child: _isLoading
                       ? Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                  )
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
                       : Text(
-                    'Gửi mật khẩu tới Email',
-                    style: GoogleFonts.getFont(
-                      'Roboto',
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
+                          'Gửi mật khẩu tới Email',
+                          style: GoogleFonts.getFont(
+                            'Roboto',
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
                 ),
               ),
             )

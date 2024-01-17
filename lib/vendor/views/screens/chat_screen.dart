@@ -13,8 +13,9 @@ class VendorHomeChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
         .collection('chats')
-        .where('sellerID', isEqualTo: FirebaseAuth.instance.currentUser!.uid).orderBy('timestamp', descending: true)
-    // Add orderBy clause
+        .where('sellerID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .orderBy('timestamp', descending: true)
+        // Add orderBy clause
         .snapshots();
 
     return Scaffold(
@@ -78,28 +79,33 @@ class VendorHomeChatScreen extends StatelessWidget {
 
             lastMessages.update(key, (existingDoc) {
               // Check if the current message's timestamp is newer
-              if (existingDoc['timestamp'].toDate().isBefore(doc['timestamp'].toDate())) {
+              if (existingDoc['timestamp']
+                  .toDate()
+                  .isBefore(doc['timestamp'].toDate())) {
                 return doc;
               }
               return existingDoc;
             }, ifAbsent: () => doc);
           });
 
-          List<QueryDocumentSnapshot> lastMessagesList = lastMessages.values.toList();
+          List<QueryDocumentSnapshot> lastMessagesList =
+              lastMessages.values.toList();
 
           return ListView.builder(
             padding: EdgeInsets.all(8.0),
             itemCount: lastMessagesList.length,
             itemBuilder: (BuildContext context, int index) {
               QueryDocumentSnapshot document = lastMessagesList[index];
-              Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
               String message = data['message'].toString();
               String senderId = data['senderId'].toString();
               String productID = data['productID'].toString();
               String buyerID = data['buyerID'].toString();
               String productName = data['productName'].toString();
 
-              bool isSellerMessage = senderId == FirebaseAuth.instance.currentUser!.uid;
+              bool isSellerMessage =
+                  senderId == FirebaseAuth.instance.currentUser!.uid;
 
               return GestureDetector(
                 onTap: () {
@@ -122,7 +128,9 @@ class VendorHomeChatScreen extends StatelessWidget {
                     backgroundImage: NetworkImage(data['buyerPhoto']),
                   ),
                   title: Text(message),
-                  subtitle: isSellerMessage ? Text('Gửi bởi Người Bán') : Text('Gửi bởi Người Mua'),
+                  subtitle: isSellerMessage
+                      ? Text('Gửi bởi Người Bán')
+                      : Text('Gửi bởi Người Mua'),
                 ),
               );
             },

@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/wishlist_models.dart';
 
-
-
 final favouriteProvider =
     StateNotifierProvider<FavouriteNotifier, Map<String, WishListModels>>(
   (ref) => FavouriteNotifier(),

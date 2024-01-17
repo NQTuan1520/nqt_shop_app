@@ -19,7 +19,7 @@ class _ShippingScreeenState extends State<ShippingScreeen>
   Widget build(BuildContext context) {
     super.build(context);
     final ProductProvider _productProvider =
-    Provider.of<ProductProvider>(context);
+        Provider.of<ProductProvider>(context);
     return Column(
       children: [
         CheckboxListTile(

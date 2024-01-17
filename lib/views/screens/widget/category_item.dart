@@ -12,7 +12,7 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CategoryController categoryController =
-    Get.find<CategoryController>();
+        Get.find<CategoryController>();
 
     return Obx(() {
       final screenWidth = MediaQuery.of(context).size.width;
@@ -43,7 +43,8 @@ class CategoryItem extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return CategoryScreen();
                     }));
                   },
@@ -71,7 +72,6 @@ class CategoryItem extends StatelessWidget {
             ),
             itemCount: categoryController.categories.length,
             itemBuilder: (context, index) {
-
               return InkWell(
                 onTap: () {
                   Get.to(CategoryProductScreen(
@@ -108,7 +108,8 @@ class CategoryItem extends StatelessWidget {
                       children: [
                         Text(
                           categoryController.categories[index].categoryName
-                              .toString().toUpperCase(),
+                              .toString()
+                              .toUpperCase(),
                           textAlign: TextAlign.center,
                           style: GoogleFonts.getFont(
                             'Poppins',

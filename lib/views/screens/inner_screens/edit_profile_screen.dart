@@ -25,10 +25,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void loadUserData() async {
     String userId = _auth.currentUser!.uid;
-    DocumentSnapshot userSnapshot = await _firestore.collection('buyers').doc(userId).get();
+    DocumentSnapshot userSnapshot =
+        await _firestore.collection('buyers').doc(userId).get();
 
     if (userSnapshot.exists) {
-      Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
+      Map<String, dynamic> userData =
+          userSnapshot.data() as Map<String, dynamic>;
       setState(() {
         _fullNameController.text = userData['fullName'];
         _placeNameController.text = userData['placeName'];
@@ -94,7 +96,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       'telephone': _telephoneController.text,
       'email': _emailController.text,
     };
-
 
     Navigator.of(context).pop(updatedUserData);
   }

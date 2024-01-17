@@ -7,7 +7,8 @@ import '../../../models/productDetailModel.dart';
 
 class ElectronicProductsWidget extends StatefulWidget {
   @override
-  _ElectronicProductsWidgetState createState() => _ElectronicProductsWidgetState();
+  _ElectronicProductsWidgetState createState() =>
+      _ElectronicProductsWidgetState();
 }
 
 class _ElectronicProductsWidgetState extends State<ElectronicProductsWidget> {
@@ -22,7 +23,8 @@ class _ElectronicProductsWidgetState extends State<ElectronicProductsWidget> {
     super.initState();
     _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', whereIn: ['Máy tính','Điện thoại']).where('approved', isEqualTo: true)
+        .where('category', whereIn: ['Máy tính', 'Điện thoại'])
+        .where('approved', isEqualTo: true)
         .snapshots();
     _startAutoScroll();
   }
@@ -42,7 +44,7 @@ class _ElectronicProductsWidgetState extends State<ElectronicProductsWidget> {
         _currentPage = 0;
       }
       _scrollController.animateTo(
-        _currentPage *180,
+        _currentPage * 180,
         duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );

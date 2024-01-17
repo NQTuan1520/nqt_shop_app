@@ -64,7 +64,7 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
           snackPosition: SnackPosition.BOTTOM,
           messageText: Text(
             'Sai Email hoặc Mật Khẩu '
-                '\nXin hãy kiểm tra lại',
+            '\nXin hãy kiểm tra lại',
             style: GoogleFonts.getFont(
               'Roboto',
               fontSize: 15,
@@ -229,13 +229,15 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 1 * fem, 11 * fem),
+                              margin: EdgeInsets.fromLTRB(
+                                  0 * fem, 0 * fem, 1 * fem, 11 * fem),
                               width: 450 * fem,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 5 * fem),
+                                    margin: EdgeInsets.fromLTRB(
+                                        0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                     child: Text(
                                       'Mật khẩu',
                                       style: GoogleFonts.getFont(
@@ -265,21 +267,31 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
                                           fillColor: Colors.white,
                                           filled: true,
                                           border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(9),
+                                            borderRadius:
+                                                BorderRadius.circular(9),
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(9),
+                                            borderRadius:
+                                                BorderRadius.circular(9),
                                           ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(9),
+                                            borderRadius:
+                                                BorderRadius.circular(9),
                                           ),
                                           errorBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(9),
+                                            borderRadius:
+                                                BorderRadius.circular(9),
                                           ),
                                           disabledBorder: InputBorder.none,
-                                          contentPadding: EdgeInsets.fromLTRB(20 * fem, 18 * fem, 48 * fem, 18 * fem),
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              20 * fem,
+                                              18 * fem,
+                                              48 * fem,
+                                              18 * fem),
                                           hintText: 'Nhập mật khẩu của bạn',
-                                          hintStyle: GoogleFonts.getFont('Roboto', color: Color(0xffbcbcbc)),
+                                          hintStyle: GoogleFonts.getFont(
+                                              'Roboto',
+                                              color: Color(0xffbcbcbc)),
                                         ),
                                         style: GoogleFonts.getFont(
                                           'Roboto',
@@ -295,7 +307,9 @@ class _VendorLoginScreenState extends State<VendorLoginScreen> {
                                           });
                                         },
                                         icon: Icon(
-                                          _showPassword ? Icons.visibility : Icons.visibility_off,
+                                          _showPassword
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
                                           color: Color(0xffbcbcbc),
                                         ),
                                       ),

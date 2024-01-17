@@ -5,17 +5,17 @@ class ProductProvider with ChangeNotifier {
 
   getFormData(
       {String? productName,
-        double? productPrice,
-        int? quantity,
-        String? category,
-        String? description,
-        DateTime? scheduleDate,
-        List<String>? imageUrl,
-        bool? chargeShipping,
-        int? shippingCharge,
-        String? brandName,
-        String? videoUrl,
-        List<String>? sizeList}) {
+      double? productPrice,
+      int? quantity,
+      String? category,
+      String? description,
+      DateTime? scheduleDate,
+      List<String>? imageUrl,
+      bool? chargeShipping,
+      int? shippingCharge,
+      String? brandName,
+      String? videoUrl,
+      List<String>? sizeList}) {
     if (productName != null) {
       productData['productName'] = productName;
     }

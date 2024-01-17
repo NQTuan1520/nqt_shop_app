@@ -74,7 +74,9 @@ class WelcomeRegisterScren extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Text(
                           'Người Mua',
                           style: GoogleFonts.getFont(
@@ -119,7 +121,9 @@ class WelcomeRegisterScren extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(width: 5,),
+                        SizedBox(
+                          width: 5,
+                        ),
                         Text(
                           'Người Bán',
                           style: GoogleFonts.getFont(

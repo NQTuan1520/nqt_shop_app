@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 class TransactionScreen extends StatelessWidget {
   final String? orderID;
 
-
   TransactionScreen({Key? key, required this.orderID}) : super(key: key);
 
   @override
@@ -18,8 +17,11 @@ class TransactionScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(FontAwesomeIcons.solidMoneyBill1),
-            SizedBox(width: 8,),
-            Text('Hoá Đơn', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+            SizedBox(
+              width: 8,
+            ),
+            Text('Hoá Đơn',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
           ],
         ),
         backgroundColor: Colors.greenAccent,
@@ -49,10 +51,11 @@ class TransactionScreen extends StatelessWidget {
             String imageUrl = (productImage is String)
                 ? productImage
                 : (productImage is List)
-                ? (productImage.isNotEmpty ? productImage[0] : '')
-                : '';
+                    ? (productImage.isNotEmpty ? productImage[0] : '')
+                    : '';
 
-            DateTime orderDate = (transaction['orderDate'] as Timestamp).toDate();
+            DateTime orderDate =
+                (transaction['orderDate'] as Timestamp).toDate();
 
             return SingleChildScrollView(
               child: Column(
@@ -90,15 +93,19 @@ class TransactionScreen extends StatelessWidget {
                   ),
                   Center(
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 100,),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 100,
+                      ),
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(100)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(100)),
                         border: Border.all(
                           color: Colors.green,
                         ),
                       ),
                       child: Text(
-                        '\$'+ ' '+ '${transaction['productPrice']}',
+                        '\$' + ' ' + '${transaction['productPrice']}',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -115,13 +122,17 @@ class TransactionScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 15),
-                            buildInfoRow('Sản phẩm:', transaction['productName']),
+                            buildInfoRow(
+                                'Sản phẩm:', transaction['productName']),
                             buildDivider(),
-                            buildInfoRow('Tổng số tiền:', '\$${transaction['productPrice']}'),
+                            buildInfoRow('Tổng số tiền:',
+                                '\$${transaction['productPrice']}'),
                             buildDivider(),
-                            buildInfoRow('Số lượng:', '${transaction['quantity']}'),
+                            buildInfoRow(
+                                'Số lượng:', '${transaction['quantity']}'),
                             buildDivider(),
-                            buildInfoRow('Tên người mua:', transaction['fullName']),
+                            buildInfoRow(
+                                'Tên người mua:', transaction['fullName']),
                             buildDivider(),
                             buildInfoRow('Địa chỉ:', transaction['placeName']),
                             buildDivider(),

@@ -24,8 +24,12 @@ class AllReviewsScreen extends StatelessWidget {
             return CircularProgressIndicator();
           } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text('Không có đánh giá nào', style: GoogleFonts.getFont(
-                'Roboto',),),
+              child: Text(
+                'Không có đánh giá nào',
+                style: GoogleFonts.getFont(
+                  'Roboto',
+                ),
+              ),
             );
           } else {
             return ListView.builder(
@@ -67,5 +71,3 @@ class AllReviewsScreen extends StatelessWidget {
     );
   }
 }
-
-

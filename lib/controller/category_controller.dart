@@ -15,7 +15,11 @@ class CategoryController extends GetxController {
   }
 
   void _fetchCategories() {
-    _firestore.collection('categories').limit(8).get().then((QuerySnapshot querySnapshot) {
+    _firestore
+        .collection('categories')
+        .limit(8)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
       categories.assignAll(
         querySnapshot.docs.map((doc) => convertToCategoryModel(doc)).toList(),
       );
@@ -30,4 +34,3 @@ class CategoryController extends GetxController {
     );
   }
 }
-

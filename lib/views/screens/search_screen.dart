@@ -5,6 +5,7 @@ import 'package:nqt_shop_app/views/screens/productDetail/product_detail_screen.d
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
   static const routeName = '/search';
 
   @override

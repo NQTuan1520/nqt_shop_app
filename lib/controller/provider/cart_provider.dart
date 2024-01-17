@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/cart_models.dart';
 
-
-
 final cartProvider =
-StateNotifierProvider<CartNotifier, Map<String, CartModel>>(
+    StateNotifierProvider<CartNotifier, Map<String, CartModel>>(
         (ref) => CartNotifier());
 
 class CartNotifier extends StateNotifier<Map<String, CartModel>> {
@@ -36,17 +34,16 @@ class CartNotifier extends StateNotifier<Map<String, CartModel>> {
     }
   }
 
-
   void addProductToCart(
-      String productName,
-      String productID,
-      List imageUrl,
-      int quantity,
-      double price,
-      String vendorId,
-      String productSize,
-      int shippingCharge,
-      ) {
+    String productName,
+    String productID,
+    List imageUrl,
+    int quantity,
+    double price,
+    String vendorId,
+    String productSize,
+    int shippingCharge,
+  ) {
     if (state.containsKey(productID)) {
       state = {
         ...state,
@@ -82,7 +79,6 @@ class CartNotifier extends StateNotifier<Map<String, CartModel>> {
     if (state.containsKey(productID)) {
       int currentQuantity = state[productID]!.quantity;
 
-
       int availableQuantity = await getAvailableQuantityFromFirebase(productID);
 
       if (currentQuantity < availableQuantity) {
@@ -116,11 +112,11 @@ class CartNotifier extends StateNotifier<Map<String, CartModel>> {
     state = {...state};
   }
 
-
   double calculateTotalAmount() {
     double totalAmount = 0.0;
     state.forEach((productID, cartItem) {
-      totalAmount += cartItem.quantity * cartItem.price + cartItem.shippingCharge;
+      totalAmount +=
+          cartItem.quantity * cartItem.price + cartItem.shippingCharge;
     });
 
     return totalAmount;
@@ -130,7 +126,5 @@ class CartNotifier extends StateNotifier<Map<String, CartModel>> {
     state = {}; // Clear the cart items
   }
 
-
   Map<String, CartModel> get getCartItems => state;
 }
-

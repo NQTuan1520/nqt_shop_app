@@ -16,7 +16,8 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference users = FirebaseFirestore.instance.collection('vendors');
+    CollectionReference users =
+        FirebaseFirestore.instance.collection('vendors');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent,
@@ -46,7 +47,8 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
       ),
       body: FutureBuilder<DocumentSnapshot>(
         future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
-        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text("Something went wrong");
           }
@@ -56,7 +58,8 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
-            Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -135,8 +138,7 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      Map<String, dynamic>? updatedData =
-                      await Navigator.push(
+                      Map<String, dynamic>? updatedData = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => EditVendorProfileScreen(),
@@ -154,7 +156,8 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.orangeAccent,
-                      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                       elevation: 5,
                       shadowColor: Colors.grey,
                     ),
@@ -172,21 +175,29 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
                   ),
                   ListTile(
                     leading: Icon(Icons.settings),
-                    title: Text('Cài đặt', style: GoogleFonts.getFont(
-                      'Roboto',),),
+                    title: Text(
+                      'Cài đặt',
+                      style: GoogleFonts.getFont(
+                        'Roboto',
+                      ),
+                    ),
                   ),
                   ListTile(
                     onTap: () async {
                       await _auth.signOut().whenComplete(() {
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
-                              return WelcomeLoginScreen();
-                            }));
+                          return WelcomeLoginScreen();
+                        }));
                       });
                     },
                     leading: Icon(Icons.logout),
-                    title: Text('Đăng xuất', style: GoogleFonts.getFont(
-                      'Roboto',),),
+                    title: Text(
+                      'Đăng xuất',
+                      style: GoogleFonts.getFont(
+                        'Roboto',
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -199,4 +210,3 @@ class _VendorAccountScreenState extends State<VendorAccountScreen> {
     );
   }
 }
-

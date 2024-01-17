@@ -279,7 +279,6 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                               document['estimatedDeliveryDate']))
                             ElevatedButton(
                               onPressed: () async {
-                                // Update 'receiveItem' field to true in Firestore
                                 await FirebaseFirestore.instance
                                     .collection('orders')
                                     .doc(document['orderID'])
@@ -368,7 +367,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                                         onRatingUpdate: (value) {
                                           rating = value;
 
-                                          // Handle the rating update here
+                                          // Handle the rating update
                                           // This callback will be triggered when the user updates the rating
                                           print(rating);
                                         },

@@ -125,11 +125,11 @@ class _VendorProductDetailScreenState extends State<VendorProductDetailScreen> {
                   'description': _productDescriptionController.text,
                   'category': _categoryNameController.text,
                 });
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
                   return EditProductScreen();
                 }));
-              } else {
-              }
+              } else {}
             } catch (e) {
               print('Error updating product: $e');
             }

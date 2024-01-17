@@ -267,17 +267,17 @@ class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
                     }
                   },
                   icon: _wishProvider.getwishItem
-                      .containsKey(widget.productData['productID'])
+                          .containsKey(widget.productData['productID'])
                       ? Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                    size: 16,
-                  )
+                          Icons.favorite,
+                          color: Colors.white,
+                          size: 16,
+                        )
                       : Icon(
-                    Icons.favorite_border,
-                    color: Colors.white,
-                    size: 16,
-                  ),
+                          Icons.favorite_border,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                 ),
               ),
               Positioned(
@@ -307,4 +307,3 @@ class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
     );
   }
 }
-

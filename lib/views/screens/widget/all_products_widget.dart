@@ -20,8 +20,10 @@ class _NewProductWidgetState extends State<NewProductWidget> {
   @override
   void initState() {
     super.initState();
-    _productsStream =
-        FirebaseFirestore.instance.collection('products').where('approved', isEqualTo: true).snapshots();
+    _productsStream = FirebaseFirestore.instance
+        .collection('products')
+        .where('approved', isEqualTo: true)
+        .snapshots();
     _startAutoScroll();
   }
 
@@ -40,7 +42,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
         _currentPage = 0;
       }
       _scrollController.animateTo(
-        _currentPage *180,
+        _currentPage * 180,
         duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );

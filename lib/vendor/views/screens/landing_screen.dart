@@ -14,7 +14,7 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CollectionReference _vendorStream =
-    FirebaseFirestore.instance.collection('vendors');
+        FirebaseFirestore.instance.collection('vendors');
     return Scaffold(
       body: StreamBuilder<DocumentSnapshot>(
         stream: _vendorStream.doc(_auth.currentUser!.uid).snapshots(),
@@ -30,14 +30,14 @@ class LandingScreen extends StatelessWidget {
             );
           }
 
-          if(!snapshot.data!.exists){
+          if (!snapshot.data!.exists) {
             return VendorRegistrationScreen();
           }
 
           VendorUserModel vendorUserModel = VendorUserModel.fromJson(
               snapshot.data!.data() as Map<String, dynamic>);
 
-          if(vendorUserModel.approved==true) {
+          if (vendorUserModel.approved == true) {
             return VendorMapScreen();
           }
 
@@ -80,7 +80,8 @@ class LandingScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () async {
                     await _auth.signOut();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return VendorLoginScreen();
                     }));
                   },

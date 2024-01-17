@@ -245,22 +245,21 @@ class VendorStoreDetail extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 350,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data!.size,
-                  itemBuilder: (context, index) {
-                    final productData = snapshot.data!.docs[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                      child: ProductDetailModel(
-                        productData: productData,
-                        fem: fem,
-                      ),
-                    );
-                  },
-                )
-              ),
+                  height: 350,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data!.size,
+                    itemBuilder: (context, index) {
+                      final productData = snapshot.data!.docs[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        child: ProductDetailModel(
+                          productData: productData,
+                          fem: fem,
+                        ),
+                      );
+                    },
+                  )),
             ],
           ),
         );

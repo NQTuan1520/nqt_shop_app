@@ -14,7 +14,10 @@ class VendorStoreController extends GetxController {
   }
 
   void _fetchVendorStores() {
-    _firestore.collection('vendors').snapshots().listen((QuerySnapshot querySnapshot) {
+    _firestore
+        .collection('vendors')
+        .snapshots()
+        .listen((QuerySnapshot querySnapshot) {
       categories.assignAll(
         querySnapshot.docs.map((doc) {
           final data = doc.data() as Map<String, dynamic>;

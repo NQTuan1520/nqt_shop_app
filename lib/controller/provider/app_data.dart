@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/address_models.dart';
 
-
-
-class AppData  with ChangeNotifier{
+class AppData with ChangeNotifier {
   AddressModels? pickUpAddress;
 
   updatePickUpAdress(AddressModels pickUp) {
@@ -12,5 +10,4 @@ class AppData  with ChangeNotifier{
 
     notifyListeners();
   }
-
 }

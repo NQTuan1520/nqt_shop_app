@@ -81,14 +81,14 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       body: Stack(
         children: [
           Offstage(
-            offstage: _pageIndex != 0, // Hide non-HomeScreen when not selected
+            offstage: _pageIndex != 0,
             child: TickerMode(
-              enabled: _pageIndex == 0, // Stop updating widget when not selected
+              enabled: _pageIndex == 0,
               child: _pages[_pageIndex],
             ),
           ),
           Offstage(
-            offstage: _pageIndex == 0, // Hide the screens when selected
+            offstage: _pageIndex == 0,
             child: _buildMainScreens(),
           ),
         ],
@@ -104,7 +104,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               case 1:
                 return _buildIcon(Icons.home, isActive, _tabTitles[1]);
               case 2:
-            return _buildIcon(Icons.account_circle, isActive, _tabTitles[2]);
+                return _buildIcon(
+                    Icons.account_circle, isActive, _tabTitles[2]);
               default:
                 return Icon(Icons.error);
             }
@@ -140,13 +141,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       children: [
         Icon(
           icon,
-          size: isActive ? 30 : 22, // Change size when selected
-          color: isActive ? Colors.orangeAccent : Colors.black, // Change color when selected
+          size: isActive ? 30 : 22,
+          color: isActive ? Colors.orangeAccent : Colors.black,
         ),
         if (isActive)
           Text(
             title,
-            style: TextStyle(fontSize: 12, color: Colors.black), // Text style for titles
+            style: TextStyle(fontSize: 12, color: Colors.black),
           ),
         if (isActive)
           Container(
@@ -154,7 +155,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             height: 8,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.orangeAccent, // Change border color when selected
+              color: Colors.orangeAccent,
             ),
           ),
       ],

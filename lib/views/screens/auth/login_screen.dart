@@ -91,7 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
     // Define different padding values based on screen height
     double bottomPadding;
 
-
     if (screenHeight < 6.8 * 10.0) {
       // For screens shorter than 6.8 inches, set bottomPadding to 10% of the screen height
       bottomPadding = screenHeight * 0.1; // Adjust this value as needed
@@ -144,8 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(70 * fem,
-                                      0 * fem, 86.56 * fem, 78 * fem),
+                                  margin: EdgeInsets.fromLTRB(
+                                      70 * fem, 0 * fem, 86.56 * fem, 78 * fem),
                                   width: double.infinity,
                                   child: Center(
                                     child: SizedBox(
@@ -240,13 +239,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 1 * fem, 11 * fem),
+                                  margin: EdgeInsets.fromLTRB(
+                                      0 * fem, 0 * fem, 1 * fem, 11 * fem),
                                   width: 450 * fem,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 5 * fem),
+                                        margin: EdgeInsets.fromLTRB(
+                                            0 * fem, 0 * fem, 0 * fem, 5 * fem),
                                         child: Text(
                                           'Mật khẩu',
                                           style: GoogleFonts.getFont(
@@ -276,21 +278,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                               fillColor: Colors.white,
                                               filled: true,
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(9),
+                                                borderRadius:
+                                                    BorderRadius.circular(9),
                                               ),
                                               focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(9),
+                                                borderRadius:
+                                                    BorderRadius.circular(9),
                                               ),
                                               enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(9),
+                                                borderRadius:
+                                                    BorderRadius.circular(9),
                                               ),
                                               errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(9),
+                                                borderRadius:
+                                                    BorderRadius.circular(9),
                                               ),
                                               disabledBorder: InputBorder.none,
-                                              contentPadding: EdgeInsets.fromLTRB(20 * fem, 18 * fem, 48 * fem, 18 * fem),
+                                              contentPadding:
+                                                  EdgeInsets.fromLTRB(
+                                                      20 * fem,
+                                                      18 * fem,
+                                                      48 * fem,
+                                                      18 * fem),
                                               hintText: 'Nhập mật khẩu của bạn',
-                                              hintStyle: GoogleFonts.getFont('Roboto', color: Color(0xffbcbcbc)),
+                                              hintStyle: GoogleFonts.getFont(
+                                                  'Roboto',
+                                                  color: Color(0xffbcbcbc)),
                                             ),
                                             style: GoogleFonts.getFont(
                                               'Roboto',
@@ -306,7 +319,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               });
                                             },
                                             icon: Icon(
-                                              _showPassword ? Icons.visibility : Icons.visibility_off,
+                                              _showPassword
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
                                               color: Color(0xffbcbcbc),
                                             ),
                                           ),
@@ -315,7 +330,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ],
                                   ),
                                 ),
-
                                 Container(
                                   margin: EdgeInsets.fromLTRB(
                                       0 * fem, 0 * fem, 1 * fem, 11 * fem),

@@ -43,7 +43,7 @@ class _VendorChatPageState extends State<VendorChatPage> {
     DocumentSnapshot sellerDoc =
         await _firestore.collection('vendors').doc(widget.sellerID).get();
     DocumentSnapshot productDoc =
-    await _firestore.collection('products').doc(widget.productID).get();
+        await _firestore.collection('products').doc(widget.productID).get();
     String message = _messageController.text.trim();
 
     if (message.isNotEmpty) {
@@ -59,7 +59,8 @@ class _VendorChatPageState extends State<VendorChatPage> {
         'message': message,
         'senderId': FirebaseAuth.instance.currentUser!.uid,
         'timestamp': DateTime.now(),
-        'productName': (productDoc.data() as Map<String, dynamic>)['productName'],
+        'productName':
+            (productDoc.data() as Map<String, dynamic>)['productName'],
       });
 
       _messageController.clear();
@@ -157,9 +158,7 @@ class _VendorChatPageState extends State<VendorChatPage> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        isBuyer
-                                            ? buyerName
-                                            : sellerName,
+                                        isBuyer ? buyerName : sellerName,
                                         style: TextStyle(color: Colors.white70),
                                         softWrap: true,
                                       ),

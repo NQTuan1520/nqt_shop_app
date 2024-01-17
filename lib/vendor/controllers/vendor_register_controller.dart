@@ -14,7 +14,7 @@ class VendorController {
 
   _uploadVendorImageToStorage(Uint8List? image) async {
     Reference ref =
-    _storage.ref().child('storeImages').child(_auth.currentUser!.uid);
+        _storage.ref().child('storeImages').child(_auth.currentUser!.uid);
 
     UploadTask uploadTask = ref.putData(image!);
 
@@ -26,9 +26,9 @@ class VendorController {
   }
 
   Future<String> createVendor(
-      String email,
-      String password,
-      ) async {
+    String email,
+    String password,
+  ) async {
     String res = 'some error occured';
 
     try {
@@ -63,14 +63,14 @@ class VendorController {
 
 // Function to save vendor data
   Future<String> registerVendor(
-      String businessName,
-      String email,
-      String phoneNumber,
-      String countryValue,
-      String stateValue,
-      String cityValue,
-      Uint8List? image,
-      ) async {
+    String businessName,
+    String email,
+    String phoneNumber,
+    String countryValue,
+    String stateValue,
+    String cityValue,
+    Uint8List? image,
+  ) async {
     String res = 'some error occured';
 
     try {
@@ -96,5 +96,4 @@ class VendorController {
 
     return res;
   }
-
 }

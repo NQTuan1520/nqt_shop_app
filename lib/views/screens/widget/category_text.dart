@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 class CategoryText extends StatefulWidget {
   @override
   State<CategoryText> createState() => _CategoryTextState();
@@ -13,7 +12,7 @@ class _CategoryTextState extends State<CategoryText> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _catgoryStream =
-    FirebaseFirestore.instance.collection('categories').snapshots();
+        FirebaseFirestore.instance.collection('categories').snapshots();
     return Padding(
       padding: const EdgeInsets.all(9.0),
       child: Column(
@@ -57,7 +56,7 @@ class _CategoryTextState extends State<CategoryText> {
                                 onPressed: () {
                                   setState(() {
                                     _selectedCategory =
-                                    categoryData['categoryName'];
+                                        categoryData['categoryName'];
                                   });
 
                                   print(_selectedCategory);

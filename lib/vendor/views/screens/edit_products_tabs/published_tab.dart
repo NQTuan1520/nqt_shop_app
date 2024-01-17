@@ -58,10 +58,10 @@ class PublishedTab extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return VendorProductDetailScreen(
-                                productData: vendorProductData,
-                              );
-                            }));
+                          return VendorProductDetailScreen(
+                            productData: vendorProductData,
+                          );
+                        }));
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -73,7 +73,9 @@ class PublishedTab extends StatelessWidget {
                               child: Image.network(
                                   vendorProductData['imageUrl'][0]),
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

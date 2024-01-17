@@ -4,7 +4,6 @@ import 'package:nqt_shop_app/vendor/views/screens/edit_product_screen.dart';
 import 'package:nqt_shop_app/vendor/views/screens/vendor_account_screen.dart';
 import 'package:nqt_shop_app/vendor/views/screens/vendor_menu_screen.dart';
 
-
 class MainVendorScreen extends StatefulWidget {
   const MainVendorScreen({Key? key}) : super(key: key);
 
@@ -12,7 +11,8 @@ class MainVendorScreen extends StatefulWidget {
   _MainVendorScreenState createState() => _MainVendorScreenState();
 }
 
-class _MainVendorScreenState extends State<MainVendorScreen> with TickerProviderStateMixin {
+class _MainVendorScreenState extends State<MainVendorScreen>
+    with TickerProviderStateMixin {
   int _pageIndex = 1;
   int _bottomNavIndex = 1;
   AnimationController? _animationController;
@@ -52,7 +52,8 @@ class _MainVendorScreenState extends State<MainVendorScreen> with TickerProvider
           Offstage(
             offstage: _pageIndex != 0, // Hide non-HomeScreen when not selected
             child: TickerMode(
-              enabled: _pageIndex == 0, // Stop updating widget when not selected
+              enabled: _pageIndex == 0,
+              // Stop updating widget when not selected
               child: _pages[_pageIndex],
             ),
           ),
@@ -73,7 +74,8 @@ class _MainVendorScreenState extends State<MainVendorScreen> with TickerProvider
               case 1:
                 return _buildIcon(Icons.home, isActive, _tabTitles[1]);
               case 2:
-                return _buildIcon(Icons.account_circle, isActive, _tabTitles[2]);
+                return _buildIcon(
+                    Icons.account_circle, isActive, _tabTitles[2]);
               default:
                 return Icon(Icons.error);
             }
@@ -110,12 +112,15 @@ class _MainVendorScreenState extends State<MainVendorScreen> with TickerProvider
         Icon(
           icon,
           size: isActive ? 30 : 22, // Change size when selected
-          color: isActive ? Colors.orangeAccent : Colors.black, // Change color when selected
+          color: isActive
+              ? Colors.orangeAccent
+              : Colors.black, // Change color when selected
         ),
         if (isActive)
           Text(
             title,
-            style: TextStyle(fontSize: 12, color: Colors.black), // Text style for titles
+            style: TextStyle(
+                fontSize: 12, color: Colors.black), // Text style for titles
           ),
         if (isActive)
           Container(

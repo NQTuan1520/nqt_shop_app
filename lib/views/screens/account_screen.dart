@@ -44,8 +44,8 @@ class _AccountScreenState extends State<AccountScreen> {
             .collection('buyers')
             .doc(_auth.currentUser!.uid)
             .get(),
-        builder: (BuildContext context,
-            AsyncSnapshot<DocumentSnapshot> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
@@ -53,7 +53,7 @@ class _AccountScreenState extends State<AccountScreen> {
             return Center(child: Text('Document does not exist'));
           }
           Map<String, dynamic> data =
-          snapshot.data!.data() as Map<String, dynamic>;
+              snapshot.data!.data() as Map<String, dynamic>;
 
           return SingleChildScrollView(
             child: Column(
@@ -134,8 +134,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () async {
-                    Map<String, dynamic>? updatedData =
-                    await Navigator.push(
+                    Map<String, dynamic>? updatedData = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => EditProfileScreen(),

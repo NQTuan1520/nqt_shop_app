@@ -32,10 +32,10 @@ class _CartScreenState extends ConsumerState<CartScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(
-                Icons.shopping_cart, // Biểu tượng giỏ hàng
+                Icons.shopping_cart,
                 color: Colors.brown,
               ),
-              SizedBox(width: 10), // Khoảng cách giữa biểu tượng và tiêu đề
+              SizedBox(width: 10),
               Text(
                 'Giỏ hàng',
                 style: GoogleFonts.getFont(

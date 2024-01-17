@@ -9,8 +9,8 @@ import 'inner_screens/category_products_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
-  static const routeName = '/category';
 
+  static const routeName = '/category';
 
   @override
   Widget build(BuildContext context) {

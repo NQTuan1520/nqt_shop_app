@@ -48,7 +48,6 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
     });
   }
 
-
   _saveVendorDetail() async {
     EasyLoading.show(status: 'Hãy đợi chút');
     if (_formKey.currentState!.validate()) {
@@ -57,8 +56,8 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
           stateValue.isNotEmpty &&
           cityValue.isNotEmpty) {
         await _vendorController
-            .registerVendor(
-            businessName, email, phoneNumber, countryValue, stateValue, cityValue, _image)
+            .registerVendor(businessName, email, phoneNumber, countryValue,
+                stateValue, cityValue, _image)
             .whenComplete(() {
           EasyLoading.dismiss();
         });
@@ -78,8 +77,6 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
       EasyLoading.dismiss();
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -116,10 +113,10 @@ class _VendorRegistrationScreenState extends State<VendorRegistrationScreen> {
                           child: _image != null
                               ? Image.memory(_image!)
                               : IconButton(
-                              onPressed: () {
-                                selectGalleryImage();
-                              },
-                              icon: Icon(CupertinoIcons.photo)),
+                                  onPressed: () {
+                                    selectGalleryImage();
+                                  },
+                                  icon: Icon(CupertinoIcons.photo)),
                         )
                       ],
                     ),

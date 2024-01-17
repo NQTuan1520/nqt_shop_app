@@ -25,7 +25,7 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
   late GoogleMapController mapController;
   final Geolocator geolocator = Geolocator();
   final Completer<GoogleMapController> _controller =
-  Completer<GoogleMapController>();
+      Completer<GoogleMapController>();
 
   /// geting user location
 
@@ -54,9 +54,10 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
     mapController.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
 
     String address =
-    await HelperMethods.findCordinateAddress(position, context);
+        await HelperMethods.findCordinateAddress(position, context);
 
-    _positionStreamSubscription = Geolocator.getPositionStream().listen((Position position) {
+    _positionStreamSubscription =
+        Geolocator.getPositionStream().listen((Position position) {
       setState(() {
         currentPosition = position;
       });
@@ -116,10 +117,10 @@ class _VendorMapScreenState extends State<VendorMapScreen> {
                       width: MediaQuery.of(context).size.width - 70,
                       child: ElevatedButton.icon(
                         onPressed: () async {
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return MainVendorScreen();
-                                }));
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) {
+                            return MainVendorScreen();
+                          }));
                         },
                         icon: Icon(FontAwesomeIcons.stackOverflow),
                         label: Padding(

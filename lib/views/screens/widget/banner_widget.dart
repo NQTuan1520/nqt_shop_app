@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../../controller/banner_controller.dart';
 
-
 class BannerArea extends StatelessWidget {
   const BannerArea({Key? key}) : super(key: key);
 
@@ -18,7 +17,8 @@ class BannerArea extends StatelessWidget {
 
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 200, // Adjust the banner height as needed
+      height: 200,
+      // Adjust the banner height as needed
       padding: EdgeInsets.symmetric(horizontal: spacing),
       decoration: BoxDecoration(
         color: Color(0xFFF7F7F7),
