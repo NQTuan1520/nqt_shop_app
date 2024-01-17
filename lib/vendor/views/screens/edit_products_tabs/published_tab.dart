@@ -76,26 +76,30 @@ class PublishedTab extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  vendorProductData['productName'],
-                                  style: TextStyle(
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    vendorProductData['productName'],
+                                    style: TextStyle(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '\$' +
-                                      ' ' +
-                                      vendorProductData['productPrice']
-                                          .toStringAsFixed(2),
-                                  style: TextStyle(
-                                      fontSize: 19,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.yellow.shade900),
-                                )
-                              ],
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Text(
+                                    '\$' +
+                                        ' ' +
+                                        vendorProductData['productPrice']
+                                            .toStringAsFixed(2),
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.yellow.shade900),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),

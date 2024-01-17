@@ -68,14 +68,18 @@ class _ProductDetailModelState extends ConsumerState<ProductDetailModel> {
               Positioned(
                 left: 7,
                 top: 130,
-                child: Text(
-                  widget.productData['productName'].toString(),
-                  style: TextStyle(
-                    color: Color(0xFF1E3354),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.3,
-                    fontFamily: 'Lato',
+                child: Container(
+                  width: 135,
+                  child: Text(
+                    widget.productData['productName'].toString(),
+                    style: TextStyle(
+                      color: Color(0xFF1E3354),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.3,
+                      fontFamily: 'Lato',
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
               ),

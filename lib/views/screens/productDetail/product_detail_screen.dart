@@ -203,6 +203,7 @@ class _ProductDetailScreenState
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
