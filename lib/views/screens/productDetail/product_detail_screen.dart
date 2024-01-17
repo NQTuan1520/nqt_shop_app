@@ -238,7 +238,7 @@ class _ProductDetailScreenState
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Row(
+                          child: Column(
                             children: [
                               Text(
                                 widget.productData['description'],
@@ -249,6 +249,7 @@ class _ProductDetailScreenState
                                   letterSpacing: 0,
                                 ),
                                 textAlign: TextAlign.center,
+                                softWrap: true,
                               ),
                             ],
                           ),
