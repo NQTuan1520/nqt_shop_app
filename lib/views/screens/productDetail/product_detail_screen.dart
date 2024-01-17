@@ -283,8 +283,8 @@ class _ProductDetailScreenState
                         ),
                       ],
                     ),
-                    widget.productData['category'] == 'clothes' ||
-                            widget.productData['category'] == 'shoes'
+                    widget.productData['category'] == 'Thời trang' ||
+                            widget.productData['category'] == 'Giày'
                         ? Column(
                             children: [
                               Text(
@@ -635,8 +635,8 @@ class _ProductDetailScreenState
                       return; // Not taking action when the product is already in the cart
                     }
 
-                    if (widget.productData['category'] != 'clothes' &&
-                        widget.productData['category'] != 'shoes') {
+                    if (widget.productData['category'] != 'Thời trang' &&
+                        widget.productData['category'] != 'Giày') {
                       _cartProvider.addProductToCart(
                           widget.productData['productName'],
                           widget.productData['productID'],
