@@ -476,50 +476,53 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                                 width: 100,
                                 child: Image.network(cartData.imageUrl[0]),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      cartData.productName,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 2,
+                              Flexible(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        cartData.productName,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      '\$' +
-                                          " " +
-                                          cartData.price.toStringAsFixed(2),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1,
-                                        color: Colors.yellow.shade900,
+                                      Text(
+                                        '\$' +
+                                            " " +
+                                            cartData.price.toStringAsFixed(2),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                          color: Colors.yellow.shade900,
+                                        ),
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        if (cartData.productSize != "")
+                                      Row(
+                                        children: [
+                                          if (cartData.productSize != "")
+                                            OutlinedButton(
+                                              onPressed: null,
+                                              child: Text(
+                                                "Size: " + cartData.productSize,
+                                              ),
+                                            ),
                                           OutlinedButton(
                                             onPressed: null,
                                             child: Text(
-                                              "Size: " + cartData.productSize,
+                                              'Số lượng: ${product['quantity']}',
                                             ),
                                           ),
-                                        OutlinedButton(
-                                          onPressed: null,
-                                          child: Text(
-                                            'Số lượng: ${product['quantity']}',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ]),

@@ -81,8 +81,8 @@ class CategoryItem extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      width: screenWidth * 0.18,
-                      height: screenWidth * 0.18,
+                      width: screenWidth > 600 ? screenWidth * 0.18 : screenWidth * 0.15,
+                      height: screenWidth > 600 ? screenWidth * 0.18 : screenWidth * 0.15,
                       // clipBehavior: Clip.antiAlias,
                       // decoration: BoxDecoration(
                       //   border: Border.all(
@@ -112,7 +112,7 @@ class CategoryItem extends StatelessWidget {
                               .toUpperCase(),
                           textAlign: TextAlign.center,
                           style: GoogleFonts.getFont(
-                            'Poppins',
+                            'Roboto',
                             color: Colors.grey.shade600,
                             fontSize: screenWidth > 600 ? 14 : 12,
                             letterSpacing: 1,

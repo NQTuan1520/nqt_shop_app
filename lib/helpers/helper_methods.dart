@@ -7,13 +7,21 @@ import '../models/address_models.dart';
 import 'request_helper.dart';
 
 class HelperMethods {
+  static DateTime? lastApiCallTime;
   static Future<String> findCordinateAddress(Position position, context) async {
     String placeAddress = '';
+
+    if (lastApiCallTime != null &&
+        DateTime.now().difference(lastApiCallTime!) < Duration(minutes: 5)) {
+      print('Skipped API call due to rate limit');
+      return placeAddress;
+    }
 
     String url =
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.latitude},${position.longitude}&key=${mapKey}';
 
     var response = await requestHelper.getRequest(url);
+    print('Geocoding API Response: $response');
     if (response != 'failed') {
       placeAddress = response['results'][0]['formatted_address'];
 
@@ -24,8 +32,12 @@ class HelperMethods {
 
       Provider.of<AppData>(context, listen: false)
           .updatePickUpAdress(pickUpAddress);
+
+      lastApiCallTime = DateTime.now();
     }
+    print('Address from findCordinateAddress: $placeAddress');
 
     return placeAddress;
   }
+
 }

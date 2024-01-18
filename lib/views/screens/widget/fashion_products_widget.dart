@@ -22,7 +22,7 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
     super.initState();
     _productsStream = FirebaseFirestore.instance
         .collection('products')
-        .where('category', whereIn: ['Thời trang', 'Giày'])
+        .where('category', whereIn: ['Giày', 'Thời Trang'])
         .where('approved', isEqualTo: true)
         .snapshots();
     _startAutoScroll();
@@ -70,7 +70,7 @@ class _FashionProductsWidgetState extends State<FashionProductsWidget> {
           );
         }
 
-        // _snapshot = snapshot; // Assign the snapshot to the class-level variable
+        _snapshot = snapshot; // Assign the snapshot to the class-level variable
 
         return Container(
           height: 250,

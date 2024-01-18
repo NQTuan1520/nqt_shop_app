@@ -9,5 +9,6 @@ class AppData with ChangeNotifier {
     pickUpAddress = pickUp;
 
     notifyListeners();
+    print('Updating pickupAddress with: $pickUp');
   }
 }

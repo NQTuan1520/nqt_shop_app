@@ -47,6 +47,18 @@ class _MapScreenState extends State<MapScreen> {
       forceAndroidLocationManager: true,
     );
 
+    _positionStreamSubscription = Geolocator.getPositionStream().listen(
+          (Position position) {
+        setState(() {
+          currentPosition = position;
+        });
+        print('Current Position: $position');
+      },
+      onError: (error) {
+        print('Error obtaining location: $error');
+      },
+    );
+
     currentPosition = position;
 
     LatLng pos = LatLng(position.latitude, position.longitude);
@@ -56,18 +68,7 @@ class _MapScreenState extends State<MapScreen> {
     String address =
         await HelperMethods.findCordinateAddress(position, context);
 
-    _positionStreamSubscription = Geolocator.getPositionStream().listen(
-      (Position position) {
-        setState(() {
-          currentPosition = position;
-        });
-      },
-      onError: (error) {
-        print('Error obtaining location: $error');
-      },
-    );
-
-    print(address);
+    print('Address from findCordinateAddress: $address');
     print('ok');
   }
 

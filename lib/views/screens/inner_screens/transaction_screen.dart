@@ -132,6 +132,9 @@ class TransactionScreen extends StatelessWidget {
                                 'Số lượng:', '${transaction['quantity']}'),
                             buildDivider(),
                             buildInfoRow(
+                                'Size:', transaction['productSize']),
+                            buildDivider(),
+                            buildInfoRow(
                                 'Tên người mua:', transaction['fullName']),
                             buildDivider(),
                             buildInfoRow('Địa chỉ:', transaction['placeName']),
