@@ -42,18 +42,17 @@ class AuthController extends GetxController {
 
 //Function to create new user
   Future<String> createUser(
-    String fullName,
-    String telephone,
-    String email,
-    String password,
-    Uint8List? image,
-  ) async {
+      String fullName,
+      String telephone,
+      String email,
+      String password,
+      Uint8List? image,
+      ) async {
     String res = 'some error occurred';
 
     try {
       // Check if the email address already exists in Authentication
-      List<String> methods =
-          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+      List<String> methods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
 
       // If email address already exists, error message
       if (methods.isNotEmpty) {
@@ -88,13 +87,12 @@ class AuthController extends GetxController {
       if (e is FirebaseAuthException) {
         switch (e.code) {
           case 'email-already-in-use':
-            res =
-                'Địa chỉ email đã tồn tại. Vui lòng sử dụng địa chỉ email khác.';
+            res = 'Địa chỉ email đã tồn tại. Vui lòng sử dụng địa chỉ email khác.';
             break;
           case 'invalid-email':
             res = 'Địa chỉ email không hợp lệ.';
             break;
-          // Handle other error codes as needed
+        // Handle other error codes as needed
           default:
             res = 'Đã xảy ra lỗi: ${e.message}';
         }
@@ -105,6 +103,8 @@ class AuthController extends GetxController {
 
     return res;
   }
+
+
 
 //Function to login user
 

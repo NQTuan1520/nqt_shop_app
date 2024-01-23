@@ -509,18 +509,26 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                                           if (cartData.productSize != "")
                                             OutlinedButton(
                                               onPressed: null,
+                                              style: OutlinedButton.styleFrom(
+                                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                              ),
                                               child: Text(
                                                 "Size: " + cartData.productSize,
                                               ),
                                             ),
+                                          SizedBox(width: 10,),
                                           OutlinedButton(
                                             onPressed: null,
+                                            style: OutlinedButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                            ),
                                             child: Text(
                                               'Số lượng: ${product['quantity']}',
                                             ),
                                           ),
                                         ],
                                       ),
+
                                     ],
                                   ),
                                 ),
