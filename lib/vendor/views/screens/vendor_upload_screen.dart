@@ -119,7 +119,7 @@ class _UploadScreenState extends State<UploadScreen> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.greenAccent,
+                backgroundColor: Colors.greenAccent,
               ),
               onPressed: () async {
                 DocumentSnapshot userDoc = await _firestore

@@ -166,13 +166,11 @@ class TransactionScreen extends StatelessWidget {
                   Navigator.popUntil(context, ModalRoute.withName('/cart'));
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  foregroundColor: Colors.white, backgroundColor: Colors.teal, padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                   elevation: 5,
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
                 ),
                 child: Text(
                   'Xác nhận',

@@ -152,7 +152,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.orangeAccent,
+                    backgroundColor: Colors.orangeAccent,
                     padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                     elevation: 5,
                     shadowColor: Colors.grey,
